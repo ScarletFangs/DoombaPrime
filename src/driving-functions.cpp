@@ -87,29 +87,42 @@ void liftToggle(){
 } 
 
 //Belt
+bool belttoggle = false;
+bool beltstopper = false;
 void beltControl(){
   if(controller1.ButtonL1.pressing()){
+    if(!beltstopper){
+      belttoggle = !belttoggle;
+      beltstopper = true;
+    }
+  }else{
+    beltstopper = false;
+  }
+
+  if(belttoggle){
     Belt.spin(fwd, 89, pct);
-  }else if(controller1.ButtonL2.pressing()){
-    Belt.spin(reverse, 89, pct);
   }else{
     Belt.stop(coast);
   }
+  if(controller1.ButtonL2.pressing()){
+    Belt.spin(reverse, 89, pct);
+  }
+  
 }
 //Back lift
 bool lifttoggle = false;
 bool liftstopper = false;
-bool justonce = true;
+bool justonce = false;
 void bLiftControl(){
-  // if(controller1.ButtonX.pressing()){
-  //   justonce = true;
-  // }
+  if(controller1.ButtonX.pressing()){
+    justonce = true;
+  }
   if(justonce){
   if(lifttoggle){
     bLift.spinToPosition(0.38, rev);
     bLift.stop(hold);
   }else{
-    bLift.spinToPosition(1.14, rev);
+    bLift.spinToPosition(1.10, rev);
     bLift.stop(hold);
   }
 

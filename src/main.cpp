@@ -20,7 +20,6 @@
 #include "GPS.h"
 #include "GPSRoutine.h"
 //-------------
-#include "routineRampSide.h"
 #include "autonSkills.h"
 
 using namespace vex;
