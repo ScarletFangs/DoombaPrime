@@ -38,7 +38,8 @@ void userControl(){
 }
 void Autonomous(){
   //UNCOMMENT ACCORDINGLY
-  blueGoalSide();
+  //blueGoalSide();
+  dirtyBlueGoalSide();
   //redGoalSide();
 }
 

@@ -24,5 +24,7 @@ void bLiftAuton(float, int, int);
 //Belt
 void beltControl(double, double);
 
+void dirtyBeltControl(float, int);
+
 
 #endif

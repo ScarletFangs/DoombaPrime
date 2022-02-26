@@ -13,4 +13,5 @@ void rampSide();
 
 void tallGoal();
 
+void dirtyBlueGoalSide();
 #endif

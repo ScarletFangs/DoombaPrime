@@ -68,7 +68,8 @@ void bLiftAuton(float degree, int speedPCT, int timeSec){
 }
 
 //Belt
-void beltControl(double time, double speedPCT){
+void beltControl(double time = 45, double speedPCT = 89)
+{
   Belt.spinFor(directionType::fwd, double (1), timeUnits::sec, double (speedPCT), velocityUnits::pct);
   while(time>0)
   {
@@ -86,3 +87,20 @@ void beltControl(double time, double speedPCT){
   }
 }
 
+void dirtyBeltControl(float rev, int speedPCT)
+{ 
+  
+  Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);  
+  wait(250, timeUnits::msec);
+  if(Belt.velocity(velocityUnits::pct) != 0){
+    Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false); 
+  }
+  else
+  {
+    Belt.rotateFor(directionType::rev, double (1), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);  
+    wait(500, timeUnits::msec);
+    Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);
+  }
+
+  
+}

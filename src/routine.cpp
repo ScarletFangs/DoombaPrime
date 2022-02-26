@@ -8,14 +8,48 @@
 using namespace vex;
 using namespace std;
 
-void blueGoalSide(){
+vex::thread beltThread(beltControl);
+
+void dirtyBlueGoalSide()
+{
+  liftAuton(0, 10, 10);     //push lift to bottom
+  latchDown.set(1);           //open
+  bLiftAuton(32.5, 50, 5); 
+  wait(1,sec);
+  moveForward(-75, 25, 10);
+  bLiftAuton(-21.5, 30, 5); //goal ready for rings
+  dirtyBeltControl(1000, 89);
+  turnClockwise(-42, 7, 10);
+  dirtyBeltControl(1000, 89);
+  moveForward(-58, 7, 10);
+  dirtyBeltControl(1000, 89);
+  turnClockwise(40, 7, 10);
+  dirtyBeltControl(1000, 89);
+  moveForward(-220, 10, 10);
+  dirtyBeltControl(45, 89);
+  turnClockwise(-60, 7, 10);
+  dirtyBeltControl(45, 89);
+
+  //moving back to collect 9 donuts we can feed
+  moveForward(-250, 7, 10);
+  dirtyBeltControl(45, 89);
+  while(1)
+  {
+    moveForward(50, 7, 10);
+    dirtyBeltControl(45, 89);
+    moveForward(-50, 7, 10);  //forward
+    dirtyBeltControl(45, 89);
+  }
+}
+
+void blueGoalSide()
+{
   liftAuton(0, 10, 10);     //push lift to bottom
   latchDown.set(1);           //open
   bLiftAuton(32.5, 50, 5); 
   wait(2,sec);
   moveForward(-75, 25, 10);
   bLiftAuton(-22, 30, 5); 
-  //vex::thread();
   beltControl(50, 89);
   turnClockwise(-42, 7, 10);
   moveForward(-45, 7, 10);
