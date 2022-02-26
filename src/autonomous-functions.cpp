@@ -57,3 +57,32 @@ void liftAuton(float degree, int speedPCT, int timeSec){
 
   setMotorTimeout(0);
 }
+
+//Move back lift
+void bLiftAuton(float degree, int speedPCT, int timeSec){
+  setMotorTimeout(timeSec);
+
+  bLift.rotateFor(directionType::fwd, double (degree/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
+
+  setMotorTimeout(0);
+}
+
+//Belt
+void beltControl(double time, double speedPCT){
+  Belt.spinFor(directionType::fwd, double (1), timeUnits::sec, double (speedPCT), velocityUnits::pct);
+  while(time>0)
+  {
+    if(Belt.velocity(velocityUnits::pct) == 0)
+    {
+      Belt.spinFor(directionType::rev, double (1), timeUnits::sec, double (speedPCT), velocityUnits::pct);
+      
+    }
+    else
+    {
+      Belt.spinFor(directionType::fwd, double (1), timeUnits::sec, double (speedPCT), velocityUnits::pct);
+      
+    }
+    time--;
+  }
+}
+

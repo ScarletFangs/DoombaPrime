@@ -5,7 +5,9 @@
 //Routines-----------------
 void aimatCornerGPS();
 
-void safeGoalSide();
+void blueGoalSide();
+
+void redGoalSide();
 
 void rampSide();
 

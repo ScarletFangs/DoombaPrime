@@ -8,16 +8,34 @@
 using namespace vex;
 using namespace std;
 
-void safeGoalSide(){
+void blueGoalSide(){
   liftAuton(0, 10, 10);     //push lift to bottom
   latchDown.set(1);           //open
-  moveForward(100, 100, 10); 
-  latchDown.set(0);
-  liftAuton(0.5, 10, 10);
-  moveForward(-90, 55, 10);
-  DriveToHeading(268, 25, 3);
-  latchDown.set(1);
-  moveForward(-22, 20, 10);
+  bLiftAuton(32.5, 50, 5); 
+  wait(2,sec);
+  moveForward(-75, 25, 10);
+  bLiftAuton(-22, 30, 5); 
+  beltControl(50, 89);
+  turnClockwise(-42, 7, 10);
+  moveForward(-45, 7, 10);
+  turnClockwise(42, 7, 10);
+  moveForward(-140, 10, 10);
+
+  
+
+
+  // moveForward(165, 100, 10); 
+  // latchDown.set(0);           //close
+  // liftAuton(0.5, 10, 10);
+  // moveForward(-20, 100, 10); 
+  // DriveToTargetXY(900,  900, 30, 120);
+  
+  //DriveToHeading(180, 25, 3);
+  // bLiftAuton(33, 30, 5); 
+  // wait(1,sec);
+  //moveForward(-20, 35, 10);
+  //bLiftAuton(120, 30, 5);    //drop the back lift. preparing to scoop
+  //moveForward(150, 20, 10);
 
   // //grab blue go other side
   // DriveToTargetXY(900, 1330, 25, 85);

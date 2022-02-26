@@ -18,5 +18,11 @@ void turnClockwise(float degree, int speedPCT, int timeSec);
 //Move lift
 void liftAuton(float, int, int);
 
+//Move back lift
+void bLiftAuton(float, int, int);
+
+//Belt
+void beltControl(double, double);
+
 
 #endif

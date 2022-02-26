@@ -37,7 +37,9 @@ void userControl(){
   }
 }
 void Autonomous(){
-  safeGoalSide();
+  //UNCOMMENT ACCORDINGLY
+  blueGoalSide();
+  //redGoalSide();
 }
 
 // //---Menu---
