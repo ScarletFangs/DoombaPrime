@@ -15,11 +15,15 @@ void blueGoalSide(){
   wait(2,sec);
   moveForward(-75, 25, 10);
   bLiftAuton(-22, 30, 5); 
+  //vex::thread();
   beltControl(50, 89);
   turnClockwise(-42, 7, 10);
   moveForward(-45, 7, 10);
   turnClockwise(42, 7, 10);
   moveForward(-140, 10, 10);
+
+  //Belt.spin(fwd);
+  //moveForward(-50, 10, 10);
 
   
 
