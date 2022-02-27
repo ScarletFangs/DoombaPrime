@@ -21,23 +21,53 @@ void dirtyBlueGoalSide()
   dirtyBeltControl(1000, 89);
   turnClockwise(-42, 7, 10);
   dirtyBeltControl(1000, 89);
-  moveForward(-58, 7, 10);
+  moveForward(-56, 7, 10); //positioning
   dirtyBeltControl(1000, 89);
   turnClockwise(40, 7, 10);
   dirtyBeltControl(1000, 89);
-  moveForward(-220, 10, 10);
-  dirtyBeltControl(45, 89);
-  turnClockwise(-60, 7, 10);
-  dirtyBeltControl(45, 89);
 
-  //moving back to collect 9 donuts we can feed
-  moveForward(-250, 7, 10);
+  //move forward 220 but divide distance so we can check if donuts get stuck
+  //1st iteration
+  moveForward(-44, 7, 10);
+  dirtyBeltControl(45, 89); 
+  //2nd iteration
+  moveForward(-44, 7, 10);
   dirtyBeltControl(45, 89);
+  //3rd iteration
+  moveForward(-44, 7, 10);
+  dirtyBeltControl(45, 89);
+  //4th iteration
+  moveForward(-44, 7, 10);
+  dirtyBeltControl(45, 89);
+  //5th iteration
+  moveForward(-44, 7, 10);
+  dirtyBeltControl(45, 89);
+  //total of 220
+
+  turnClockwise(-60, 7, 10);
+
+  // //moving back to collect 9 donuts we can feed. we divide it into chunks
+  // //#1
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //#2
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //#3
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //#4
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //fifth move forward 50 to get to our end so we can feed donuts
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  
   while(1)
   {
-    moveForward(50, 7, 10);
+    moveForward(70, 7, 10);
     dirtyBeltControl(45, 89);
-    moveForward(-50, 7, 10);  //forward
+    moveForward(-70, 7, 10);  //forward
     dirtyBeltControl(45, 89);
   }
 }

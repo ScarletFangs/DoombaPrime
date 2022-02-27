@@ -25,11 +25,11 @@ void tankDriveToggle(){
 void arcadeDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis1.value())){
 
-    leftWheels.spin(fwd,controller1.Axis3.value()*0.4+controller1.Axis1.value()*0.6,pct);
-    rightWheels.spin(fwd, controller1.Axis3.value()*0.4-controller1.Axis1.value()*0.6,pct);
+    leftWheels.spin(fwd,controller1.Axis3.value()*0.4+controller1.Axis1.value()*0.55,pct);
+    rightWheels.spin(fwd, controller1.Axis3.value()*0.4-controller1.Axis1.value()*0.55,pct);
   }else{
-    leftWheels.stop(changeBrake());
-    rightWheels.stop(changeBrake());
+    leftWheels.stop(coast);
+    rightWheels.stop(coast);
   }
 }
 
@@ -119,7 +119,7 @@ void bLiftControl(){
   }
   if(justonce){
   if(lifttoggle){
-    bLift.spinToPosition(0.38, rev);
+    bLift.spinToPosition(0.36, rev);
     bLift.stop(hold);
   }else{
     bLift.spinToPosition(1.10, rev);
@@ -137,3 +137,4 @@ void bLiftControl(){
   wait(20,msec);
   }
 } 
+
