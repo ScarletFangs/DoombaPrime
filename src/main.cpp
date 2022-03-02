@@ -42,6 +42,7 @@ void Autonomous(){
   //dirtyBlueGoalSide();
   FrontYellowGoal();
   //redGoalSide();
+  //gpsTEST();
 }
 
 // //---Menu---

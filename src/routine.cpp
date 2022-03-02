@@ -10,6 +10,16 @@ using namespace std;
 
 vex::thread beltThread(beltControl);
 
+void gpsTEST(){
+ImprovedDriveToHeading(180, 5, 20, 5);
+wait(1, sec);
+ImprovedDriveToHeading(0, 5, 20, 5);
+wait(1, sec);
+ImprovedDriveToHeading(270, 5, 20, 5);
+wait(1, sec);
+ImprovedDriveToHeading(90, 5, 20, 5);
+}
+
 void FrontYellowGoal(){
   liftAuton(0, 10, 10);     //push lift to bottom
   latchDown.set(1);   //open
