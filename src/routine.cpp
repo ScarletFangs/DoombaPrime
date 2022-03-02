@@ -10,6 +10,16 @@ using namespace std;
 
 vex::thread beltThread(beltControl);
 
+void FrontYellowGoal(){
+  liftAuton(0, 10, 10);     //push lift to bottom
+  latchDown.set(1);   //open
+  moveForward(160, 100, 5);
+  latchDown.set(0);   //close
+  //moveForward(-200, 100, 5);
+  liftAuton(1, 10, 10);
+  //turnClockwise(31, 50, 5);
+}
+
 void dirtyBlueGoalSide()
 {
   liftAuton(0, 10, 10);     //push lift to bottom
@@ -128,14 +138,7 @@ void blueGoalSide()
   // DriveToTargetXY(900, 0, 32, 65);
 }
 
-void tallGoal(){
-  latchDown.set(1);
-  moveForward(114, 100, 5);
-  latchDown.set(0);
-  moveForward(-115, 100, 5);
-  liftAuton(1, 10, 10);
-  turnClockwise(31, 50, 5);
-}
+
 
 void aimatCornerGPS(){
   liftAuton(0, 10, 10);     //push lift to bottom

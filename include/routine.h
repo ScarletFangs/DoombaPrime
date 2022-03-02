@@ -11,7 +11,7 @@ void redGoalSide();
 
 void rampSide();
 
-void tallGoal();
+void FrontYellowGoal();
 
 void dirtyBlueGoalSide();
 #endif

@@ -8,15 +8,15 @@ brain Brain;
 controller controller1(primary);
 
 //Driving motors
-motor left1(PORT1, ratio6_1, true); //bottom row
+motor left1(PORT1, ratio6_1, false); //bottom row
 motor left2(PORT20, ratio6_1, true); //front
-motor left3(PORT4, ratio6_1, false); //top row
-motor left4(PORT12, ratio6_1, false);
+motor left3(PORT4, ratio6_1, true); //top row
+motor left4(PORT12, ratio6_1, true);
 
 motor right1(PORT10, ratio6_1, false); //bottom row
-motor right2(PORT7, ratio6_1, false); //front
-motor right3(PORT11, ratio6_1, true); //top row
-motor right4(PORT19, ratio6_1, true);
+motor right2(PORT7, ratio6_1, true); //front
+motor right3(PORT11, ratio6_1, false); //top row
+motor right4(PORT19, ratio6_1, false);
 
 //Motor Groups
 motor_group leftWheels(left1, left2, left3, left4);
