@@ -34,7 +34,7 @@ motor_group lift(liftL1, liftL2, liftR1, liftR2);
 digital_out latchDown = digital_out(Brain.ThreeWirePort.A);
 
 //GPS
-gps DrivetrainGPS = gps(PORT9, -20.5, -3.0, mm, -90); //port, x, y, units, angle
+gps DrivetrainGPS = gps(PORT9, -190, -20, mm, -90); //port, x, y, units, angle
 smartdrive Drivetrain = smartdrive(leftWheels, rightWheels, DrivetrainGPS, 319.19, 320, 40, mm, 1);
 long map(long x, long in_min, long in_max, long out_min, long out_max)
  {

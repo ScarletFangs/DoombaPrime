@@ -14,4 +14,6 @@ void rampSide();
 void FrontYellowGoal();
 
 void dirtyBlueGoalSide();
+
+void gpsTEST();
 #endif

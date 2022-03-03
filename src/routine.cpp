@@ -10,14 +10,37 @@ using namespace std;
 
 vex::thread beltThread(beltControl);
 
+void gpsTEST(){
+ImprovedDriveToHeading(180, 5, 20, 5);
+wait(1, sec);
+ImprovedDriveToHeading(0, 5, 20, 5);
+wait(1, sec);
+ImprovedDriveToHeading(270, 5, 20, 5);
+wait(1, sec);
+ImprovedDriveToHeading(90, 5, 20, 5);
+}
+
 void FrontYellowGoal(){
   liftAuton(0, 10, 10);     //push lift to bottom
   latchDown.set(1);   //open
-  moveForward(160, 100, 5);
+  moveForward(166, 70, 10);
   latchDown.set(0);   //close
-  //moveForward(-200, 100, 5);
+  moveForward(-75, 30, 500000000);
   liftAuton(1, 10, 10);
-  //turnClockwise(31, 50, 5);
+
+  //turn for blue positioning
+  //ImprovedDriveToHeading(200, 5, 20, 5);
+  ImprovedDriveToHeading(180, 5, 20, 5);
+  DriveToTargetXY(880, 430, 20, 30);
+  wait(1, sec);
+  ImprovedDriveToHeading(180, 5, 20, 5);
+
+  //grab blue
+  bLiftAuton(32, 50, 5);
+  moveForward(-130, 20, 5);
+  bLiftAuton(-21.7, 30, 5);
+  dirtyBeltControl(1000, 89);
+  moveForward(20, 20, 5);
 }
 
 void dirtyBlueGoalSide()
