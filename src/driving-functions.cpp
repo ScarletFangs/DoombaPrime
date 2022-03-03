@@ -12,19 +12,8 @@ void tankDrive(){
   }
 }
 
-void tankDriveToggle(){
-  if(abs(controller1.Axis3.value())>5||abs(controller1.Axis2.value())){
-    leftWheels.spin(fwd, controller1.Axis3.value()*1.4, pct);
-    rightWheels.spin(fwd, controller1.Axis2.value()*1.4,pct);
-  }else{
-    leftWheels.stop(coast);
-    rightWheels.stop(coast);
-  }
-}
-
 void arcadeDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis1.value())){
-
     leftWheels.spin(fwd,controller1.Axis3.value()*0.4+controller1.Axis1.value()*0.55,pct);
     rightWheels.spin(fwd, controller1.Axis3.value()*0.4-controller1.Axis1.value()*0.55,pct);
   }else{
@@ -36,7 +25,7 @@ void arcadeDrive(){
 bool brakes = false;
 bool brakeStopper = false;
 vex::brakeType changeBrake(){
-  if(controller1.ButtonLeft.pressing()){
+  if(controller1.ButtonUp.pressing()){
     if(!brakeStopper){
       brakes = !brakes;
       brakeStopper = true;
@@ -137,4 +126,3 @@ void bLiftControl(){
   wait(20,msec);
   }
 } 
-

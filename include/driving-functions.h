@@ -3,7 +3,6 @@
 
 //Drive
 void tankDrive();
-void tankDriveToggle();
 void arcadeDrive();
 
 vex::brakeType changeBrake();
@@ -17,8 +16,5 @@ void beltControl();
 
 //Back lift
 void bLiftControl();
-
-//change drive
-void changeDrive();
 
 #endif
