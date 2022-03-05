@@ -11,11 +11,15 @@ void redGoalSide();
 
 void rampSide();
 
-void FrontYellowGoal();
+void FrontYellowGoalRED();
+void FrontYellowGoalBLUE();
 
 void dirtyBlueGoalSide();
 
 void gpsTEST();
 
-void otherSideTallGoal();
+void otherSideTallGoalRED();
+
+void otherSideTallGoalBLUE();
+
 #endif

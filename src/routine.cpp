@@ -10,30 +10,7 @@ using namespace std;
 
 vex::thread beltThread(beltControl);
 
-void otherSideTallGoal()
-{
-  // //moveForward to get goal in front of it
-  // liftAuton(-5, 10, 5);     //push lift to bottom
-  // latchDown.set(1);   //open
-  // DriveToTargetXY(250, -880, 20, 65);
-  // moveForward(20, 5, 5);
-  // // moveForward(189, 50, 5);
-  // latchDown.set(0);   //close
-  // //moveForward(-75, 30, 500000000);
-  // wait(1, msec);
-  // //liftAuton(1.5, 10, 5);
-  // //turnClockwise(-20, 7, 5);
-  // //making rings off place
-  // ImprovedDriveToHeading(180, 20, 5, 20);
-  // //wait(5, msec);
-  // ImprovedDriveToHeading(160, 20, 5, 20);
-
-  // //head back
-  // DriveToTargetXY(795, -1130, 10, 35);
-  // ImprovedDriveToHeading(238, 1, 5, 20);
-  // bLiftAuton(32, 50, 5);
-  // moveForward(-50, 20, 10);
-
+void otherSideTallGoalBLUE(){
   latchDown.set(1);
   bLiftAuton(31, 50, 5);
   moveForward(-43, 20, 5);
@@ -42,6 +19,7 @@ void otherSideTallGoal()
 
   moveForward(40, 10, 5);
   turnClockwise(30, 20, 5);
+  dirtyBeltControl(45, 89);
   moveForward(20, 10, 5);
   turnClockwise(30, 20, 5);
   moveForward(20, 10, 5);
@@ -50,6 +28,36 @@ void otherSideTallGoal()
   DriveToTargetXY(0, -900, 7, 65);
   moveForward(15, 20, 5);
   latchDown.set(0);
+
+  ImprovedDriveToHeading(180, 10, 3, 50);
+  moveForward(10, 20, 5);
+  ImprovedDriveToHeading(270, 10, 3, 50);
+
+  moveForward(-150, 60, 50);
+}
+void otherSideTallGoalRED(){
+  latchDown.set(1);
+  bLiftAuton(31, 50, 5);
+  moveForward(-43, 20, 5);
+  bLiftAuton(-21.2, 30, 5);
+  dirtyBeltControl(1000, 89);
+
+  moveForward(40, 10, 5);
+  turnClockwise(30, 20, 5);
+  dirtyBeltControl(45, 89);
+  moveForward(20, 10, 5);
+  turnClockwise(30, 20, 5);
+  moveForward(20, 10, 5);
+
+  DriveToTargetXY(-600, 900, 7, 65);
+  DriveToTargetXY(0, 900, 7, 65);
+  moveForward(15, 20, 5);
+  latchDown.set(0);
+
+  ImprovedDriveToHeading(0, 10, 3, 50);
+  moveForward(10, 20, 5);
+  ImprovedDriveToHeading(90, 10, 3, 50);
+
   moveForward(-150, 60, 50);
 }
 
@@ -65,7 +73,7 @@ ImprovedDriveToHeading(90, 1, 20, 10);
 }
 
 //BETTER WORK 3/4
-void FrontYellowGoal(){
+void FrontYellowGoalRED(){
   liftAuton(0, 10, 10);     //push lift to bottom
   latchDown.set(1);   //open
   //flexMvmtR(181, 191, 60, 76, 10);    //60,76
@@ -84,9 +92,9 @@ void FrontYellowGoal(){
   moveForward(-115, 20, 5);
   bLiftAuton(-21.2, 30, 5);
   dirtyBeltControl(1000, 89);
-  DriveToTargetXY(-1060, -1200, 5, 40);
+  DriveToTargetXY(-1060, -1190, 5, 40);
   //turnClockwise(-30, 7, 10);
-  ImprovedDriveToHeading(270, 1, 5, 50);   //85 for blue side
+  ImprovedDriveToHeading(270, 1, 3, 50);   //85 for blue side
   dirtyBeltControl(1000, 89);
   wait(5, msec);
 
@@ -109,7 +117,7 @@ void FrontYellowGoal(){
   //total of 220
 
   //turnClockwise(-110, 7, 10);
-  ImprovedDriveToHeading(90, 1, 5, 50);
+  ImprovedDriveToHeading(90, 1, 3, 50);
 
   // //moving back to collect 9 donuts we can feed. we divide it into chunks
   // //#1
@@ -137,6 +145,77 @@ void FrontYellowGoal(){
   }
 }
 
+void FrontYellowGoalBLUE(){
+  liftAuton(0, 10, 10);     //push lift to bottom
+  latchDown.set(1);   //open
+  //flexMvmtR(181, 191, 60, 76, 10);    //60,76
+  moveForward(181, 70, 10);
+  latchDown.set(0);   //close
+  moveForward(-75, 30, 500000000);
+
+  //turn for blue positioning
+  //ImprovedDriveToHeading(200, 5, 20, 5);
+  DriveToTargetXY(920, 500, 10, 45);  //920
+  wait(1, sec);
+  ImprovedDriveToHeading(180, 1, 3, 50); //174 for blue side
+
+  //grab blue
+  bLiftAuton(32, 50, 5);
+  moveForward(-115, 20, 5);
+  bLiftAuton(-21.2, 30, 5);
+  dirtyBeltControl(1000, 89);
+  DriveToTargetXY(1060, 1190, 5, 40);
+  //turnClockwise(-30, 7, 10);
+  ImprovedDriveToHeading(90, 1, 3, 50);   //85 for blue side
+  dirtyBeltControl(1000, 89);
+  wait(5, msec);
+
+  //move forward 220 but divide distance so we can check if donuts get stuck
+  //1st iteration
+  moveForward(-44, 7, 10);
+  dirtyBeltControl(45, 89); 
+  //2nd iteration
+  moveForward(-44, 7, 10);
+  dirtyBeltControl(45, 89);
+  //3rd iteration
+  moveForward(-44, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //4th iteration
+  // moveForward(-44, 7, 10);
+  // dirtyBeltControl(45, 89);
+  // //5th iteration
+  // moveForward(-44, 7, 10);
+  // dirtyBeltControl(45, 89);
+  //total of 220
+
+  //turnClockwise(-110, 7, 10);
+  ImprovedDriveToHeading(270, 1, 3, 50);
+
+  // //moving back to collect 9 donuts we can feed. we divide it into chunks
+  // //#1
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //#2
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //#3
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  // //#4
+  moveForward(-50, 7, 10);
+  dirtyBeltControl(45, 89);
+  //   // //#5
+  // moveForward(-50, 7, 10);
+  // dirtyBeltControl(45, 89);
+   
+  while(1)
+  {
+    moveForward(70, 7, 10);
+    dirtyBeltControl(45, 89);
+    moveForward(-70, 7, 10);  //forward
+    dirtyBeltControl(45, 89);
+  }
+}
 void dirtyBlueGoalSide()
 {
   liftAuton(0, 10, 10);     //push lift to bottom
