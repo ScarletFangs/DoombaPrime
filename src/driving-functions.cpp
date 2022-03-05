@@ -96,8 +96,8 @@ void beltControl(){
   if(controller1.ButtonL2.pressing()){
     Belt.spin(reverse, 89, pct);
   }
-  
 }
+
 //Back lift
 bool lifttoggle = false;
 bool liftstopper = false;
@@ -111,7 +111,7 @@ void bLiftControl(){
     bLift.spinToPosition(0.36, rev);
     bLift.stop(hold);
   }else{
-    bLift.spinToPosition(1.10, rev);
+    bLift.spinToPosition(1.09, rev);    //1.10
     bLift.stop(hold);
   }
 

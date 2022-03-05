@@ -8,7 +8,7 @@ void setMotorTimeout(int timeSeconds);
 void moveForward(float distanceCM, int speedPCT, int timeSec);
 
 //Input sides individually (turning right)
-void flexMvmtR(float distanceLeft, float distanceRight, int speedPCT, int timeSec);
+void flexMvmtR(float distanceLeft, float distanceRight, int speedPCTL, int speedPCTR, int timeSec);
 //Input sides individually (turning left)
 void flexMvmtL(float, float, int, int);
 

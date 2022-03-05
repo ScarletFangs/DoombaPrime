@@ -20,12 +20,13 @@ void moveForward(float distanceCM, int speedPCT, int timeSec){
 
   setMotorTimeout(0);
 }
+
 //Drive forward with flex input (turning right based off front side)(*if rightWheel distance bigger)
-void flexMvmtR(float distanceLeft, float distanceRight, int speedPCT, int timeSec){
+void flexMvmtR(float distanceLeft, float distanceRight, int speedPCTL, int speedPCTR, int timeSec){
   setMotorTimeout(timeSec);
 
-  leftWheels.rotateFor(directionType::fwd, double(distanceLeft/31.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
-  rightWheels.rotateFor(directionType::fwd, double(distanceRight/31.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
+  leftWheels.rotateFor(directionType::fwd, double(distanceLeft/31.9), rotationUnits::rev, double(speedPCTL), velocityUnits::pct, false);
+  rightWheels.rotateFor(directionType::fwd, double(distanceRight/31.9), rotationUnits::rev, double(speedPCTR), velocityUnits::pct, true);
 
   setMotorTimeout(0);
 }
@@ -61,7 +62,7 @@ void liftAuton(float degree, int speedPCT, int timeSec){
 //Move back lift
 void bLiftAuton(float degree, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
-
+  
   bLift.rotateFor(directionType::fwd, double (degree/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
 
   setMotorTimeout(0);
@@ -86,7 +87,7 @@ void beltControl(double time = 45, double speedPCT = 89)
     time--;
   }
 }
-
+bool justthisonce = true;
 void dirtyBeltControl(float rev, int speedPCT)
 { 
   
@@ -97,6 +98,10 @@ void dirtyBeltControl(float rev, int speedPCT)
   }
   else
   {
+    if(justthisonce){
+      bLiftAuton(0.5, 10, 5);
+      justthisonce = !justthisonce;
+    }
     Belt.rotateFor(directionType::rev, double (1), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);  
     wait(500, timeUnits::msec);
     Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);

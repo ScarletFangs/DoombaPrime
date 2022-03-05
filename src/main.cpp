@@ -40,9 +40,11 @@ void Autonomous(){
   //UNCOMMENT ACCORDINGLY
   //blueGoalSide();
   //dirtyBlueGoalSide();
-  FrontYellowGoal();
+  //FrontYellowGoal();
   //redGoalSide();
   //gpsTEST();
+  otherSideTallGoal();
+
 }
 
 // //---Menu---
