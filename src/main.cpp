@@ -40,11 +40,7 @@ competition Competition;
 //   //gpsTEST();
   
 //   //Testing Uncomment list
-//   otherSideTallGoalBLUE();
-//   // otherSideTallGoalRED();
-  
-//   //FrontYellowGoalBLUE();
-//   //FrontYellowGoalRED();
+//   dirtyBlueGoalSide();
 // }
 
 //---Menu---
@@ -67,7 +63,8 @@ void Autonomous(){
       printf("skills");
     }
     notificationHUD("Auton: Done");
-  }else if(getValues(AUTON_TYPE) == RED){
+  }
+  else if(getValues(AUTON_TYPE) == RED){
     if(getValues(AUTON_TYPE) == GOALSIDE){
       FrontYellowGoalRED();
       printf("goal side auton");
