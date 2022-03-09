@@ -101,12 +101,14 @@ void beltControl(){
 //Back lift
 bool lifttoggle = false;
 bool liftstopper = false;
-bool justonce = false;
+bool initialdown = false;
+//code to drop down a little if gets blocked like auton
+bool justdownonce = false;
 void bLiftControl(){
   if(controller1.ButtonX.pressing()){
-    justonce = true;
+    initialdown = true;
   }
-  if(justonce){
+  if(initialdown){
   if(lifttoggle){
     bLift.spinToPosition(0.36, rev);
     bLift.stop(hold);
