@@ -94,7 +94,8 @@ void DriveToTargetXY(int x, int y, int base_speed, int GPS_DriveDistance_Thresho
   ErrorDerivative = float(TurnError - PreviousError) / dT;
 
   //Apply Proportional Control to TurnError
-  DriveVelocity = int((0.4*TurnError) + int(0*ErrorIntegral) + int(0*ErrorDerivative)); //* CurrentDriveDistance * .0015);
+  DriveVelocity = int((0.2*TurnError) + int(0*ErrorIntegral) + int(0*ErrorDerivative)); //* CurrentDriveDistance * .0015);
+                    //(0.4*TurnError)
 
   //Calculate distance to speed with Map function
   DistanceTOSpeed = map(CurrentDriveDistance, 0, InitialDriveDistance, 0, base_speed);

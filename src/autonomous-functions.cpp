@@ -86,7 +86,7 @@ void beltControl(double time = 45, double speedPCT = 89)
     time--;
   }
 }
-
+bool loweronce = true;
 void dirtyBeltControl(float rev, int speedPCT)
 { 
   
@@ -97,6 +97,10 @@ void dirtyBeltControl(float rev, int speedPCT)
   }
   else
   {
+    if(loweronce){
+    bLiftAuton(1, 10, 3);
+    loweronce = !loweronce;
+    }
     Belt.rotateFor(directionType::rev, double (1), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);  
     wait(500, timeUnits::msec);
     Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);

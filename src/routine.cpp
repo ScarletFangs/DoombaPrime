@@ -283,28 +283,46 @@ void dirtyBlueGoalSide()
 void skillsAuton(){
   //1push then grab yellow to other side
   latchDown.set(1);   //open
-  moveForward(200, 40, 10);
+  //moveForward(200, 40, 10);
+  DriveToTargetXY(0, -970, 25, 50);     //0, -970, 19, 50
   latchDown.set(0);   //close
-  wait(1, msec);
+  moveForward(5, 20, 3);
   liftAuton(2, 10, 5);
-  moveForward(30, 10, 5);
-  turnClockwise(35, 30, 3);
-  moveForward(20, 20, 5);
+  // moveForward(30, 10, 3);
+  // turnClockwise(35, 20, 3);   //35,30,3
+  // moveForward(20, 19, 3);
   printf("1:DONE\n");
 
   //2position for grabbing goal off ramp
   //liftAuton(70, 20, 5);
-  DriveToTargetXY(635, -1210, 9, 60);
-  ImprovedDriveToHeading(246, 20, 3, 50);
+  DriveToTargetXY(635, -1300, 9, 60);       //635, -1270
+  ImprovedDriveToHeading(238, 20, 3, 50);  //246
   wait(5, msec);
   printf("2:DONE\n");
 
   //3drive and pick up goal off ramp and move
-  bLiftAuton(32.5, 50, 5); 
-  moveForward(-75, 20, 5);
-  bLiftAuton(-21.5, 30, 5);
-  moveForward(75, 20, 5);
+  bLiftAuton(33, 50, 2); 
+  moveForward(-120, 25, 2);
+  bLiftAuton(-30, 30, 2);     //-25 good
+  moveForward(75, 35, 2);
   printf("3:DONE\n");
-  dirtyBeltControl(1000, 89);
+  
+  //4drive to feed donuts into red
+  ImprovedDriveToHeading(300, 5, 3, 50);
+  DriveToTargetXY(-200, -850, 19, 50);
+  ImprovedDriveToHeading(90, 5, 3, 50);
+
+  //5go back to start scoring rings
+  dirtyBeltControl(100, 89);
+  moveForward(-120, 10, 10);    //initial go back
+  dirtyBeltControl(45, 89);
+  moveForward(80, 10, 10);
+  dirtyBeltControl(45, 89);
+  moveForward(-80, 10, 10);
+  dirtyBeltControl(45, 89);
+  moveForward(80, 10, 10);
+  dirtyBeltControl(45, 89);
+  moveForward(-80, 10, 10);
+  dirtyBeltControl(45, 89);
 }
 
