@@ -284,7 +284,7 @@ void skillsAuton(){
   //1push then grab yellow to other side
   latchDown.set(1);   //open
   //moveForward(200, 40, 10);
-  DriveToTargetXY(0, -970, 25, 50);     //0, -970, 19, 50
+  DriveToTargetXY(0, -970, 47, 50);     //0, -970, 19, 50
   latchDown.set(0);   //close
   moveForward(5, 20, 3);
   liftAuton(2, 10, 5);
@@ -301,9 +301,9 @@ void skillsAuton(){
   printf("2:DONE\n");
 
   //3drive and pick up goal off ramp and move
-  bLiftAuton(33, 50, 2); 
+  bLiftAuton(42, 50, 2); 
   moveForward(-120, 25, 2);
-  bLiftAuton(-30, 30, 2);     //-25 good
+  bLiftAuton(-32, 30, 2);     //-25 good
   moveForward(75, 35, 2);
   printf("3:DONE\n");
   
