@@ -334,3 +334,48 @@ void skillsAuton(){
 
 }
 
+void hardCodeSkills(){
+  latchDown.set(1);
+  moveForward(170, 40, 5);
+  latchDown.set(0);                           //grab yellow goal
+  liftAuton(1, 50, 5);
+  moveForward(100, 40, 5);
+  ImprovedDriveToHeading(135, 10, 3, 50);
+  moveForward(100, 40, 5);
+  ImprovedDriveToHeading(225, 10, 3, 50);     //face blift towards red goal on ramp
+  bLiftAuton(0.18, 1);
+  moveForward(-50, 30, 5);
+  bLiftAuton(0.8, 1);
+  moveForward(30, 40, 5);
+  ImprovedDriveToHeading(270, 10, 3, 50);     //line up with line of rings and score rings on the way back
+  moveForward(75, 40, 5);
+  ImprovedDriveToHeading(90, 10, 3, 50);
+  moveForward(-25, 20, 5);
+  dirtyBeltControl(100, 89, 5);               //feed preloads
+  moveForward(-25, 20, 5);
+  dirtyBeltControl(100, 89, 5);
+  moveForward(-25, 20, 5);
+  dirtyBeltControl(100, 89, 5);
+  moveForward(-25, 20, 5);
+  dirtyBeltControl(100, 89, 5);
+  moveForward(50, 20, 5);
+  moveForward(-50, 20, 5);
+  dirtyBeltControl(100, 89, 5);
+  moveForward(-50, 20, 5);
+  dirtyBeltControl(100, 89, 5);
+  bLiftAuton(0.18, 1);
+  moveForward(30, 40, 5);                     //drop red goal
+  bLiftAuton(0.8, 1);
+  ImprovedDriveToHeading(0, 10, 3, 50);
+  bLiftAuton(0.18, 1);
+  moveForward(-40, 40, 5);                    //grab blue goal
+  bLiftAuton(0.8, 1);
+  ImprovedDriveToHeading(45, 10, 3, 50);
+  moveForward(250, 40, 5);                    //drive to blue ramp and score yellow high
+  liftAuton(240, 50, 5);
+  moveForward(20, 20, 5);
+  latchDown.set(1);
+  
+  
+
+}

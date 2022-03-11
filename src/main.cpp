@@ -33,7 +33,7 @@ void userControl(){
     // liftToggle();
     // bLiftControl();
     // beltControl();
-    skillsAuton();
+    //skillsAuton();
   }
 }
 void Autonomous(){
@@ -41,8 +41,9 @@ void Autonomous(){
   
   //Testing Uncomment list
   //dirtyBlueGoalSide();
-  // skillsAuton();
+  //skillsAuton();
   //FrontYellowGoalRED();
+  hardCodeSkills();
 }
 
 // //---Menu---

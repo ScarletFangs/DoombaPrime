@@ -15,4 +15,6 @@ void otherSideTallGoalBLUE();
 
 void skillsAuton();
 
+void hardCodeSkills();
+
 #endif
