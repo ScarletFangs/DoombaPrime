@@ -14,8 +14,8 @@ void tankDrive(){
 
 void arcadeDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis1.value())){
-    leftWheels.spin(fwd,controller1.Axis3.value()*0.4+controller1.Axis1.value()*0.45,pct);
-    rightWheels.spin(fwd, controller1.Axis3.value()*0.4-controller1.Axis1.value()*0.45,pct);
+    leftWheels.spin(fwd,controller1.Axis3.value()*0.38+controller1.Axis1.value()*0.35,pct);
+    rightWheels.spin(fwd, controller1.Axis3.value()*0.36-controller1.Axis1.value()*0.35,pct);
   }else{
     leftWheels.stop(coast);
     rightWheels.stop(coast);
@@ -102,6 +102,7 @@ void beltControl(){
 bool lifttoggle = false;
 bool liftstopper = false;
 bool initialdown = false;
+float attempts = 0.00;
 //code to drop down a little if gets blocked like auton
 bool justdownonce = false;
 void bLiftControl(){
@@ -110,11 +111,15 @@ void bLiftControl(){
   }
   if(initialdown){
   if(lifttoggle){
-    bLift.spinToPosition(0.36, rev);
+    bLift.spinToPosition(0.20, rev);   
     bLift.stop(hold);
   }else{
-    bLift.spinToPosition(1.09, rev);    //1.10
+    bLift.spinToPosition(0.89, rev);   
     bLift.stop(hold);
+  }
+  if(controller1.ButtonB.pressing()){
+    bLift.spinTo(0.18+attempts, rev);
+    attempts = attempts + 0.12;
   }
 
   if(controller1.ButtonX.pressing()){

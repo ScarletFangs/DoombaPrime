@@ -59,10 +59,12 @@ void liftAuton(float degree, int speedPCT, int timeSec){
 }
 
 //Move back lift
-void bLiftAuton(float degree, int speedPCT, int timeSec){
+void bLiftAuton(float amt_of_rotation, int timeSec)
+//void bLiftAuton(double degree, int speedPCT, int timeSec)
+{
   setMotorTimeout(timeSec);
-
-  bLift.rotateFor(directionType::fwd, double (degree/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
+  bLift.spinToPosition(float (amt_of_rotation), rotationUnits::rev);
+  //bLift.rotateFor(directionType::fwd, double (degree/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
 
   setMotorTimeout(0);
 }
@@ -87,9 +89,9 @@ void beltControl(double time = 45, double speedPCT = 89)
   }
 }
 bool loweronce = true;
-void dirtyBeltControl(float rev, int speedPCT)
-{ 
-  
+void dirtyBeltControl(float rev, int speedPCT, int timeout){ 
+  setMotorTimeout(timeout);
+
   Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);  
   wait(250, timeUnits::msec);
   if(Belt.velocity(velocityUnits::pct) != 0){
@@ -98,7 +100,7 @@ void dirtyBeltControl(float rev, int speedPCT)
   else
   {
     if(loweronce){
-    bLiftAuton(1, 10, 3);
+    bLiftAuton(0.17, 1);
     loweronce = !loweronce;
     }
     Belt.rotateFor(directionType::rev, double (1), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);  
@@ -106,5 +108,5 @@ void dirtyBeltControl(float rev, int speedPCT)
     Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);
   }
 
-  
+  setMotorTimeout(0);
 }

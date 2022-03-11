@@ -28,12 +28,12 @@ competition Competition;
 // Without Menu
 void userControl(){
   while(1){
-    arcadeDrive();
-    //tankDrive();
-    liftControl();
-    liftToggle();
-    bLiftControl();
-    beltControl();
+    // arcadeDrive();
+    // liftControl();
+    // liftToggle();
+    // bLiftControl();
+    // beltControl();
+    skillsAuton();
   }
 }
 void Autonomous(){
@@ -41,7 +41,8 @@ void Autonomous(){
   
   //Testing Uncomment list
   //dirtyBlueGoalSide();
-  skillsAuton();
+  // skillsAuton();
+  //FrontYellowGoalRED();
 }
 
 // //---Menu---
@@ -51,7 +52,7 @@ void Autonomous(){
 //   notificationHUD("Robot: OK");
 // }
 // void Autonomous(){
-//   if(getValues(AUTON_TYPE)== BLUE){
+//   if(getValues(AUTON_COLOR)== BLUE){
 //     if(getValues(AUTON_TYPE) == GOALSIDE){
 //       FrontYellowGoalBLUE();
 //       printf("goal side auton");
@@ -60,21 +61,21 @@ void Autonomous(){
 //       otherSideTallGoalBLUE();
 //       printf("ramp side auton");
 //     }else if(getValues(AUTON_TYPE) == SKILLS){
-//       score130points();
+//       skillsAuton();
 //       printf("skills");
 //     }
 //     notificationHUD("Auton: Done");
 //   }
-//   else if(getValues(AUTON_TYPE) == RED){
+//   else if(getValues(AUTON_COLOR) == RED){
 //     if(getValues(AUTON_TYPE) == GOALSIDE){
 //       FrontYellowGoalRED();
-//       printf("goal side auton");
+//       printf("REDgoal side auton");
 //     }else if(getValues(AUTON_TYPE) == RAMPSIDE){
 //       //rampSide();
 //       otherSideTallGoalRED();
 //       printf("ramp side auton");
 //     }else if(getValues(AUTON_TYPE) == SKILLS){
-//       score130points();
+//       skillsAuton();
 //       printf("skills");
 //     }
 //     notificationHUD("Auton: Done");

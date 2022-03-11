@@ -191,11 +191,12 @@ void ImprovedDriveToHeading(int TargetHeading,int base_speed, int precision, int
   while( abs(HeadingError) > 3 && Iterations < Iter){
   DriveToHeading(TargetHeading, base_speed, precision);
   Drivetrain.stop();
-  wait(100, msec);
+  //wait(100, msec);
+  wait(50, msec);
   CurrentHeading = DrivetrainGPS.heading();
   HeadingError = TargetHeading - CurrentHeading;
   Iterations += 1;
-  printf("\nIteration: %i | Target Heading: %i | Heading Error: %i ", Iterations, TargetHeading, HeadingError);
+  //printf("\nIteration: %i | Target Heading: %i | Heading Error: %i ", Iterations, TargetHeading, HeadingError);
 
   }
 

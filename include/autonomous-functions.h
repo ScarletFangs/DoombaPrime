@@ -19,12 +19,12 @@ void turnClockwise(float degree, int speedPCT, int timeSec);
 void liftAuton(float, int, int);
 
 //Move back lift
-void bLiftAuton(float, int, int);
+void bLiftAuton(float, int);
 
 //Belt
 void beltControl(double, double);
 
-void dirtyBeltControl(float, int);
+void dirtyBeltControl(float, int, int);
 
 
 #endif
