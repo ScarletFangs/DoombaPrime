@@ -334,9 +334,13 @@ void skillsAuton(){
 
 }
 
-void hardCodeSkills(){
-  // latchDown.set(1);
-  // moveForward(170, 40, 5);
+void hardCodeSkills(){ //Current state as of 03/11: can grab yellow then go grab red and bring back 
+                       //to red zone pretty consistently (~90% of the time). Have not completed the 
+                       //next step of grabbing blue goal and scoring high on blue ramp. There is a 
+                       //timing issue as well. Might need to remove GPS turns and use normal turning
+                       //to save time. Looking at ~10 seconds that need to be shaved off.
+  latchDown.set(1);
+  moveForward(170, 40, 5);
   latchDown.set(0);                           //grab yellow goal
   liftAuton(1, 50, 5);
 
