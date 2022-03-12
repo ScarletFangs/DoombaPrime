@@ -281,50 +281,59 @@ void dirtyBlueGoalSide()
 }
 
 void skillsAuton(){
-  //1push then grab yellow to other side
-  latchDown.set(1);   //open
-  //moveForward(200, 40, 10);
-  DriveToTargetXY(0, -970, 47, 100); //DriveToTargetXY(0, -970, 47, 50);     //0, -970, 19, 50
-  latchDown.set(0);   //close
-  moveForward(5, 35, 1);
-  liftAuton(2, 10, 1);
-  printf("1:DONE\n");
+  // //1push then grab yellow to other side
+  // latchDown.set(1);   //open
+  // //moveForward(200, 40, 10);
+  // DriveToTargetXY(0, -970, 47, 100); //DriveToTargetXY(0, -970, 47, 50);     //0, -970, 19, 50
+  // latchDown.set(0);   //close
+  // moveForward(5, 35, 1);
+  // liftAuton(2, 10, 1);
+  // printf("1:DONE\n");
 
-  //2position for grabbing goal off ramp
-  DriveToTargetXY(635, -1270, 10, 55);       //635,-1270,13,65
-  ImprovedDriveToHeading(240, 10, 6, 20);  //238
-  wait(5, msec);
-  printf("2:DONE\n");
+  // //2position for grabbing goal off ramp
+  // DriveToTargetXY(635, -1270, 10, 55);       //635,-1270,13,65
+  // ImprovedDriveToHeading(240, 10, 6, 20);  //238
+  // wait(5, msec);
+  // printf("2:DONE\n");
 
-  //3drive and pick up goal off ramp and move
-  bLiftAuton(1.25, 1);        //bLiftAuton(-33, 50, 2); (0.87, 1);
-  moveForward(-145, 35, 1);   //-125, 25, 1
-  bLiftAuton(0.5, 1);     //bLiftAuton(-21.5, 30, 5); (0.2, 1);
-  moveForward(75, 25, 1);
-  printf("3:DONE\n");
+  // //3drive and pick up goal off ramp and move
+  // bLiftAuton(1.25, 1);        //bLiftAuton(-33, 50, 2);
+  // moveForward(-160, 35, 5);   //-125, 25, 1
+  // bLiftAuton(0.5, 1);     //bLiftAuton(-21.5, 30, 5);
+  // moveForward(75, 25, 1);
+  // printf("3:DONE\n");
   
-  //4 drive to personal square
-  ImprovedDriveToHeading(300, 5, 3, 50);  //300, 5, 3, 50
-  DriveToTargetXY(-200, -850, 19, 50);
-  ImprovedDriveToHeading(90, 5, 3, 50);   //300, 5, 3, 50
-  printf("4:DONE\n");
+  // //4 drive to personal square
+  // ImprovedDriveToHeading(300, 5, 3, 50);  //300, 5, 3, 50
+  // DriveToTargetXY(-200, -850, 19, 50);
+  // ImprovedDriveToHeading(90, 4, 3, 50);   //300, 5, 3, 50
+  // printf("4:DONE\n");
   
   //5go back to start scoring rings
-  dirtyBeltControl(10, 89, 1);
+  //dirtyBeltControl(10, 89, 1);
   //moveForward(-120, 10, 10);    //initial go back
-  moveForward(-50, 10, 10);
-  dirtyBeltControl(10, 89, 1);
-  moveForward(-50, 10, 10);
-  dirtyBeltControl(10, 89, 1);
+  liftAuton(-5, 10, 1);
+  lift.stop(coast);
+  bLiftAuton(1.23, 1);
+  wait(1, msec);
+  bLiftAuton(0.5, 1);
+  moveForward(-50, 10, 2);
+  //dirtyBeltControl(10, 89, 1);
+  moveForward(-40, 10, 2);
+  //dirtyBeltControl(10, 89, 1);
   printf("5:DONE\n");
 
   //6
-  bLiftAuton(0.85, 1);
-  moveForward(70, 10, 1);
-  //DriveToTargetXY(-850, -600, 10, 50);
+  bLiftAuton(1.23, 1);
+  moveForward(100, 10, 1);
+  bLiftAuton(1.10, 1);
+  printf("yes\n");
+  DriveToTargetXY(-850, -600, 10, 30);
+  printf("no\n");
   ImprovedDriveToHeading(0, 5, 3, 20);
+  printf("yes\n");
   moveForward(-100, 10, 1);
-  bLiftAuton(0.18, 1);    //0.2, 1
+  bLiftAuton(0.5, 1);    
   moveForward(70, 10, 1);
   printf("6:DONE\n");
 
