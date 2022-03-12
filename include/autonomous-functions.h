@@ -20,6 +20,7 @@ void liftAuton(float, int, int);
 
 //Move back lift
 void bLiftAuton(float, int);
+void bLiftAuton2(double, int, int);
 
 //Belt
 void beltControl(double, double);

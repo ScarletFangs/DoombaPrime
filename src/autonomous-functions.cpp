@@ -69,6 +69,15 @@ void bLiftAuton(float amt_of_rotation, int timeSec)
   setMotorTimeout(0);
 }
 
+void bLiftAuton2(double degree, int speedPCT, int timeSec)
+{
+  setMotorTimeout(timeSec);
+  //bLift.spinToPosition(float (amt_of_rotation), rotationUnits::rev);
+  bLift.rotateFor(directionType::fwd, double (degree/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
+
+  setMotorTimeout(0);
+}
+
 //Belt
 void beltControl(double time = 45, double speedPCT = 89)
 {
