@@ -318,21 +318,21 @@ void skillsAuton(){
   wait(1, msec);
   bLiftAuton(0.5, 1);
   moveForward(-50, 10, 2);
-  //dirtyBeltControl(10, 89, 1);
+  dirtyBeltControl(10, 89, 1);
   moveForward(-40, 10, 2);
-  //dirtyBeltControl(10, 89, 1);
+  dirtyBeltControl(10, 89, 1);
   printf("5:DONE\n");
 
-  //6
+  //6   //field lifted, attempt code at ocmpeittion tmr
   bLiftAuton(1.23, 1);
-  moveForward(100, 10, 1);
+  moveForward(125, 15, 1);
   bLiftAuton(1.10, 1);
   printf("yes\n");
   DriveToTargetXY(-850, -600, 10, 30);
   printf("no\n");
   ImprovedDriveToHeading(0, 5, 3, 20);
   printf("yes\n");
-  moveForward(-100, 10, 1);
+  moveForward(-150, 20, 3);
   bLiftAuton(0.5, 1);    
   moveForward(70, 10, 1);
   printf("6:DONE\n");
