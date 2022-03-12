@@ -4,18 +4,18 @@
 //Drive
 void tankDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis2.value())){
-    leftWheels.spin(fwd, controller1.Axis3.value()*1.4, pct);
-    rightWheels.spin(fwd, controller1.Axis2.value()*1.4,pct);
+    leftWheels.spin(fwd, controller1.Axis3.value(), pct);
+    rightWheels.spin(fwd, controller1.Axis2.value(),pct);
   }else{
-    leftWheels.stop(hold);
-    rightWheels.stop(hold);
+    leftWheels.stop(coast);
+    rightWheels.stop(coast);
   }
 }
 
 void arcadeDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis1.value())){
-    leftWheels.spin(fwd,controller1.Axis3.value()*0.38+controller1.Axis1.value()*0.35,pct);
-    rightWheels.spin(fwd, controller1.Axis3.value()*0.36-controller1.Axis1.value()*0.35,pct);
+    leftWheels.spin(fwd,controller1.Axis3.value()*0.38+controller1.Axis1.value()*0.2,pct);
+    rightWheels.spin(fwd, controller1.Axis3.value()*0.36-controller1.Axis1.value()*0.2,pct);
   }else{
     leftWheels.stop(coast);
     rightWheels.stop(coast);
@@ -102,25 +102,34 @@ void beltControl(){
 bool lifttoggle = false;
 bool liftstopper = false;
 bool initialdown = false;
-float attempts = 0.00;
+float bliftdegree = 0.5;
 //code to drop down a little if gets blocked like auton
 bool justdownonce = false;
 void bLiftControl(){
   if(controller1.ButtonX.pressing()){
-    initialdown = true;
+    printf("FIRST\n");
+    initialdown =  true;
   }
   if(initialdown){
   if(lifttoggle){
-    bLift.spinToPosition(0.20, rev);   
+    printf("SECOND\n");
+    bLift.spinToPosition(bliftdegree, rev);  //0.22, rev
+    printf("motor1 torque: %f\n", bLift1.torque());  
+    printf("motor2 torque: %f\n", bLift2.torque());     
     bLift.stop(hold);
+    
   }else{
-    bLift.spinToPosition(0.89, rev);   
+    printf("THIRD\n");
+    bLift.spinToPosition(1.25, rev);  //0.91,rev   
     bLift.stop(hold);
   }
   if(controller1.ButtonB.pressing()){
-    bLift.spinTo(0.18+attempts, rev);
-    attempts = attempts + 0.12;
+    bliftdegree = bliftdegree + 0.1;
   }
+
+  printf("motor1 torque: %f\n", bLift1.torque());  
+  printf("motor2 torque: %f\n", bLift2.torque());  
+
 
   if(controller1.ButtonX.pressing()){
     if(!stopper){

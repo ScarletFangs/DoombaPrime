@@ -14,9 +14,9 @@ vex::thread beltThread(beltControl);
 
 void otherSideTallGoalBLUE(){
   latchDown.set(1);
-  bLiftAuton(0.88, 2);  //comes down //previous before modification: bLiftAuton(31, 50, 5);
+  bLiftAuton(1.25, 2);  //comes down //previous before modification: bLiftAuton(31, 50, 5);
   moveForward(-43, 20, 5);
-  bLiftAuton(0.19, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
+  bLiftAuton(0.5, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
   dirtyBeltControl(1000, 89, 1);
 
   moveForward(40, 10, 5);
@@ -39,9 +39,9 @@ void otherSideTallGoalBLUE(){
 }
 void otherSideTallGoalRED(){
   latchDown.set(1);
-  bLiftAuton(0.88, 2);  //comes down //previous before modification: bLiftAuton(31, 50, 5);
+  bLiftAuton(1.25, 2);  //comes down //previous before modification: bLiftAuton(31, 50, 5);
   moveForward(-43, 20, 5);
-  bLiftAuton(0.19, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
+  bLiftAuton(0.5, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
   dirtyBeltControl(1000, 89, 1);
 
   moveForward(40, 10, 5);
@@ -90,9 +90,9 @@ void FrontYellowGoalRED(){
   ImprovedDriveToHeading(0, 1, 5, 50); //174 for blue side
 
   //grab blue
-  bLiftAuton(0.88, 2);  //comes down //previous before modification: bLiftAuton(32, 50, 5);
+  bLiftAuton(1.25, 2);  //comes down //previous before modification: bLiftAuton(32, 50, 5);
   moveForward(-115, 20, 5);
-  bLiftAuton(0.19, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
+  bLiftAuton(0.5, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
   dirtyBeltControl(1000, 89, 1);
   DriveToTargetXY(-1060, -1190, 5, 40);
   //turnClockwise(-30, 7, 10);
@@ -162,9 +162,9 @@ void FrontYellowGoalBLUE(){
   ImprovedDriveToHeading(180, 5, 3, 50); //174 for blue side
 
   //grab blue
-  bLiftAuton(0.88, 2);  //comes down //previous before modification: bLiftAuton(32, 50, 5);
+  bLiftAuton(1.25, 2);  //comes down //previous before modification: bLiftAuton(32, 50, 5);
   moveForward(-115, 20, 5);
-  bLiftAuton(0.19, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
+  bLiftAuton(0.5, 2); //comes up //previous before modification: bLiftAuton(-21.2, 30, 5);
   dirtyBeltControl(1000, 89, 1);
   DriveToTargetXY(1060, 1190, 5, 40);
   //turnClockwise(-30, 7, 10);
@@ -222,10 +222,10 @@ void dirtyBlueGoalSide()
 {
   liftAuton(0, 10, 10);     //push lift to bottom
   latchDown.set(1);           //open
-  bLiftAuton(0.88, 2);  //comes down //previous before modification: bLiftAuton(32.5, 50, 5); 
+  bLiftAuton(1.25, 2);  //comes down //previous before modification: bLiftAuton(32.5, 50, 5); 
   wait(1,sec);
   moveForward(-75, 25, 10);
-  bLiftAuton(0.19, 2); //comes up //previous before modification: bLiftAuton(-21.5, 30, 5); //goal ready for rings
+  bLiftAuton(0.5, 2); //comes up //previous before modification: bLiftAuton(-21.5, 30, 5); //goal ready for rings
   dirtyBeltControl(1000, 89, 1);
   turnClockwise(-42, 7, 10);
   dirtyBeltControl(1000, 89, 1);
@@ -297,9 +297,9 @@ void skillsAuton(){
   printf("2:DONE\n");
 
   //3drive and pick up goal off ramp and move
-  bLiftAuton(0.80, 1);        //bLiftAuton(-33, 50, 2); (0.87, 1);
+  bLiftAuton(1.25, 1);        //bLiftAuton(-33, 50, 2); (0.87, 1);
   moveForward(-145, 35, 1);   //-125, 25, 1
-  bLiftAuton(0.18, 1);     //bLiftAuton(-21.5, 30, 5); (0.2, 1);
+  bLiftAuton(0.5, 1);     //bLiftAuton(-21.5, 30, 5); (0.2, 1);
   moveForward(75, 25, 1);
   printf("3:DONE\n");
   
@@ -323,7 +323,7 @@ void skillsAuton(){
   moveForward(70, 10, 1);
   //DriveToTargetXY(-850, -600, 10, 50);
   ImprovedDriveToHeading(0, 5, 3, 20);
-  moveForward(-70, 10, 1);
+  moveForward(-100, 10, 1);
   bLiftAuton(0.18, 1);    //0.2, 1
   moveForward(70, 10, 1);
   printf("6:DONE\n");
