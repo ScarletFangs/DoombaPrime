@@ -97,7 +97,7 @@ void beltControl(double time = 45, double speedPCT = 89)
     time--;
   }
 }
-bool loweronce = true;
+
 void dirtyBeltControl(float rev, int speedPCT, int timeout){ 
   setMotorTimeout(timeout);
 
@@ -108,10 +108,6 @@ void dirtyBeltControl(float rev, int speedPCT, int timeout){
   }
   else
   {
-    if(loweronce){
-    bLiftAuton(0.17, 1);
-    loweronce = !loweronce;
-    }
     Belt.rotateFor(directionType::rev, double (1), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);  
     wait(500, timeUnits::msec);
     Belt.rotateFor(directionType::fwd, double (rev), rotationUnits::rev, double (speedPCT), velocityUnits::pct, false);
