@@ -14,8 +14,8 @@ void tankDrive(){
 
 void arcadeDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis1.value())){
-    leftWheels.spin(fwd,controller1.Axis3.value()*0.38+controller1.Axis1.value()*0.35,pct);
-    rightWheels.spin(fwd, controller1.Axis3.value()*0.36-controller1.Axis1.value()*0.35,pct);
+    leftWheels.spin(fwd,controller1.Axis3.value()*1.5+controller1.Axis1.value()*0.35,pct);
+    rightWheels.spin(fwd, controller1.Axis3.value()*1.5-controller1.Axis1.value()*0.35,pct);
   }else{
     leftWheels.stop(coast);
     rightWheels.stop(coast);

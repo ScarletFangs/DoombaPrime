@@ -28,11 +28,11 @@ competition Competition;
 // Without Menu
 void userControl(){
   while(1){
-    // arcadeDrive();
-    // liftControl();
-    // liftToggle();
-    // bLiftControl();
-    // beltControl();
+     arcadeDrive();
+     liftControl();
+    liftToggle();
+    bLiftControl();
+    beltControl();
     //skillsAuton();
   }
 }
