@@ -15,8 +15,8 @@ void setMotorTimeout(int timeSeconds){
 void moveForward(float distanceCM, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
 
-  leftWheels.rotateFor(directionType::fwd, double (distanceCM/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,false);
-  rightWheels.rotateFor(directionType::fwd, double (distanceCM/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
+  leftWheels.rotateFor(fwd, double (distanceCM/31.9), rev, double (speedPCT), pct,false);
+  rightWheels.rotateFor(fwd, double (distanceCM/31.9), rev, double (speedPCT), pct,true);
 
   setMotorTimeout(0);
 }
