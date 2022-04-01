@@ -19,11 +19,18 @@
 #include "customMenu.h"
 #include "GPS.h"
 #include "GPSRoutine.h"
+#include "visionExperiment.h"
 //-------------
 #include "autonSkills.h"
 
 using namespace vex;
 competition Competition;
+
+//headers for Vision Sensor
+vex::brain Brain;
+vex::vision VisionSensor (vex::PORT19);
+
+
 
 // // Without Menu
 void userControl(){
@@ -36,11 +43,12 @@ void userControl(){
   }
 }
 void Autonomous(){
+  //VisionTest();  //TESTING VISION SENSOR
+
   //gpsTEST();
-  
   //Testing Uncomment list
   //dirtyBlueGoalSide();
-  skillsAuton();
+  //skillsAuton();   //UNCOMMENT THIS! Nate commented this out to try Vision Sensor
   //FrontYellowGoalRED();
 }
 
