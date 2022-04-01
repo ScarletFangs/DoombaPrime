@@ -6,6 +6,7 @@ extern brain Brain;
 
 //Controller
 extern controller controller1;
+extern controller controller2;  
 
 //Driving motor
 extern motor left1;
@@ -37,6 +38,10 @@ extern digital_out latchDown;
 
 //GPS
 extern gps DrivetrainGPS;
+
+//Inertial sensor
+extern inertial inertialLeft;
+extern inertial inertialRight;
 
 //Belt
 extern motor Belt;

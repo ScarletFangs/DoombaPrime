@@ -3,15 +3,8 @@
 #define ROUTINE
 
 //Routines-----------------
-void FrontYellowGoalRED();
-void FrontYellowGoalBLUE();
+void rampFront();
 
-void dirtyBlueGoalSide();
-
-void gpsTEST();
-
-void otherSideTallGoalRED();
-void otherSideTallGoalBLUE();
 
 void skillsAuton();
 

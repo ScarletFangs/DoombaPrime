@@ -1,11 +1,12 @@
 #include "vex.h"
 #include "driving-functions.h"
 
-//Drive
+//Drive (100% yang, 85% sirena)
+float speed = 1;
 void tankDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis2.value())){
-    leftWheels.spin(fwd, controller1.Axis3.value(), pct);
-    rightWheels.spin(fwd, controller1.Axis2.value(),pct);
+    leftWheels.spin(fwd, controller1.Axis3.value()*speed, pct);
+    rightWheels.spin(fwd, controller1.Axis2.value()*speed,pct);
   }else{
     leftWheels.stop(coast);
     rightWheels.stop(coast);
@@ -14,8 +15,8 @@ void tankDrive(){
 
 void arcadeDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis1.value())){
-    leftWheels.spin(fwd,controller1.Axis3.value()*0.38+controller1.Axis1.value()*0.2,pct);
-    rightWheels.spin(fwd, controller1.Axis3.value()*0.36-controller1.Axis1.value()*0.2,pct);
+    leftWheels.spin(fwd,controller1.Axis3.value()+controller1.Axis1.value()*0.8,pct);
+    rightWheels.spin(fwd, controller1.Axis3.value()-controller1.Axis1.value()*0.8,pct);
   }else{
     leftWheels.stop(coast);
     rightWheels.stop(coast);
@@ -42,6 +43,26 @@ vex::brakeType changeBrake(){
   wait(20, msec);
 }
 
+bool speedtoggle = false;
+bool speedstopper = false;
+void changespeed(){
+  if(speedtoggle){
+    speed = 0.4;
+  }else{
+    speed = 0.85;
+  }
+
+  if(controller1.ButtonUp.pressing()){
+    if(!speedstopper){
+      speedtoggle = !speedtoggle;
+      speedstopper = true;
+    }
+  }else{
+    speedstopper = false;
+  }
+  wait(20,msec);
+}
+
 
 //4 Bar
 void liftControl(){
@@ -64,7 +85,7 @@ void liftToggle(){
     latchDown.set(0);
   }
 
-  if(controller1.ButtonA.pressing()){
+  if(controller1.ButtonL2.pressing()){
     if(!stopper){
       toggle = !toggle;
       stopper = true;
@@ -75,11 +96,13 @@ void liftToggle(){
   wait(20,msec);
 } 
 
+
+
 //Belt
 bool belttoggle = false;
 bool beltstopper = false;
 void beltControl(){
-  if(controller1.ButtonL1.pressing()){
+  if(controller1.ButtonA.pressing()||controller2.ButtonA.pressing()){
     if(!beltstopper){
       belttoggle = !belttoggle;
       beltstopper = true;
@@ -93,7 +116,7 @@ void beltControl(){
   }else{
     Belt.stop(coast);
   }
-  if(controller1.ButtonL2.pressing()){
+  if(controller1.ButtonX.pressing()||controller2.ButtonX.pressing()){
     Belt.spin(reverse, 89, pct);
   }
 }
@@ -106,30 +129,21 @@ float bliftdegree = 0.5;
 //code to drop down a little if gets blocked like auton
 bool justdownonce = false;
 void bLiftControl(){
-  if(controller1.ButtonX.pressing()){
+  if(controller1.ButtonB.pressing()){
     printf("FIRST\n");
     initialdown =  true;
   }
   if(initialdown){
   if(lifttoggle){
     printf("SECOND\n");
-    bLift.spinToPosition(bliftdegree, rev);  //0.22, rev
-    printf("motor1 torque: %f\n", bLift1.torque());  
-    printf("motor2 torque: %f\n", bLift2.torque());     
+    bLift.spinToPosition(-0.25, rev);
+    // bLift.spinTo(0.5, rev, false);
     bLift.stop(hold);
-    
   }else{
     printf("THIRD\n");
-    bLift.spinToPosition(1.25, rev);  //0.91,rev   
+    bLift.spinToPosition(0.02, rev);  
     bLift.stop(hold);
   }
-  if(controller1.ButtonB.pressing()){
-    bliftdegree = bliftdegree + 0.1;
-  }
-
-  printf("motor1 torque: %f\n", bLift1.torque());  
-  printf("motor2 torque: %f\n", bLift2.torque());  
-
 
   if(controller1.ButtonX.pressing()){
     if(!stopper){
@@ -141,4 +155,18 @@ void bLiftControl(){
   }
   wait(20,msec);
   }
+  // printf("end of function\n");
 } 
+
+void bLiftManual(){
+  if(controller1.ButtonB.pressing()||controller2.ButtonB.pressing()){
+    // bLift.spinToPosition(1.25, rev);
+    bLift.spin(fwd, 55.0, pct);
+  }else if(controller1.ButtonY.pressing()||controller2.ButtonY.pressing()){
+    // bLift.spinToPosition(0.02, rev);
+    bLift.spin(reverse, 55.0, pct);
+  }else{
+    bLift.stop(hold);
+  }
+
+}

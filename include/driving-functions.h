@@ -6,6 +6,7 @@ void tankDrive();
 void arcadeDrive();
 
 vex::brakeType changeBrake();
+void changespeed();
 
 //4 Bar
 void liftControl();
@@ -16,5 +17,6 @@ void beltControl();
 
 //Back lift
 void bLiftControl();
+void bLiftManual();
 
 #endif

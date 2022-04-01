@@ -3,20 +3,22 @@
 using namespace vex;
 
 // A global instance of brain used for printing to the V5 brain screen
+//PORT2 BAD?
 brain Brain;
 
 controller controller1(primary);
+controller controller2(partner);
 
 //Driving motors
-motor left1(PORT1, ratio6_1, false); //bottom row
-motor left2(PORT20, ratio6_1, true); //front
-motor left3(PORT4, ratio6_1, true); //top row
-motor left4(PORT12, ratio6_1, true);
+motor left1(PORT1, ratio18_1, false); //bottom row
+motor left2(PORT20, ratio18_1, true); //front
+motor left3(PORT4, ratio18_1, true); //top row
+motor left4(PORT12, ratio18_1, true);
 
-motor right1(PORT10, ratio6_1, false); //bottom row
-motor right2(PORT7, ratio6_1, true); //front
-motor right3(PORT11, ratio6_1, false); //top row
-motor right4(PORT19, ratio6_1, false);
+motor right1(PORT10, ratio18_1, false); //bottom row
+motor right2(PORT7, ratio18_1, true); //front
+motor right3(PORT11, ratio18_1, false); //top row
+motor right4(PORT19, ratio18_1, false);
 
 //Motor Groups
 motor_group leftWheels(left1, left2, left3, left4);
@@ -40,6 +42,11 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
  {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
+
+//Inertial Sensor
+inertial inertialLeft = inertial(PORT4);
+inertial inertialRight = inertial(PORT19);
+
 
 //Belt
 motor Belt(PORT18, ratio18_1, false);

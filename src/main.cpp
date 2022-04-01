@@ -25,23 +25,21 @@
 using namespace vex;
 competition Competition;
 
-// // Without Menu
+// Without Menu
 void userControl(){
   while(1){
-    arcadeDrive();
+    //arcadeDrive();
+    tankDrive();
     liftControl();
     liftToggle();
-    bLiftControl();
+    //bLiftControl();
     beltControl();
+    bLiftManual();
+    changespeed();
   }
 }
 void Autonomous(){
-  //gpsTEST();
-  
-  //Testing Uncomment list
-  //dirtyBlueGoalSide();
-  skillsAuton();
-  //FrontYellowGoalRED();
+  rampFront();
 }
 
 // //---Menu---

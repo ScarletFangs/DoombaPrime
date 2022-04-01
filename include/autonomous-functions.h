@@ -6,7 +6,6 @@ void setMotorTimeout(int timeSeconds);
 
 //Drive distance with specific distance
 void moveForward(float distanceCM, int speedPCT, int timeSec);
-
 //Input sides individually (turning right)
 void flexMvmtR(float distanceLeft, float distanceRight, int speedPCTL, int speedPCTR, int timeSec);
 //Input sides individually (turning left)
@@ -25,6 +24,10 @@ void bLiftAuton(float, int);
 void beltControl(double, double);
 
 void dirtyBeltControl(float, int, int);
+
+//inertial sensors
+float inertialAVG();
+void inertialTurn(vex::turnType dir, double speed, double degrees, double timeout);
 
 
 #endif
