@@ -5,6 +5,7 @@
 //Routines-----------------
 void rampFront();
 
+void rampSafe();
 
 void skillsAuton();
 

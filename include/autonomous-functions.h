@@ -23,7 +23,7 @@ void bLiftAuton(float, int);
 //Belt
 void beltControl(double, double);
 
-void dirtyBeltControl(float, int, int);
+void dirtyBeltControl(float, double, int);
 
 //inertial sensors
 float inertialAVG();

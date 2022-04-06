@@ -15,8 +15,8 @@ void setMotorTimeout(int timeSeconds){
 void moveForward(float distanceCM, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
 
-  leftWheels.rotateFor(fwd, double (distanceCM/31.9), rev, double (speedPCT), pct,false);
-  rightWheels.rotateFor(fwd, double (distanceCM/31.9), rev, double (speedPCT), pct,true);
+  leftWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
+  rightWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
 
   setMotorTimeout(0);
 }
@@ -24,8 +24,8 @@ void moveForward(float distanceCM, int speedPCT, int timeSec){
 void flexMvmtR(float distanceLeft, float distanceRight, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
 
-  leftWheels.rotateFor(directionType::fwd, double(distanceLeft/31.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
-  rightWheels.rotateFor(directionType::fwd, double(distanceRight/31.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
+  leftWheels.rotateFor(directionType::fwd, double(distanceLeft/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
+  rightWheels.rotateFor(directionType::fwd, double(distanceRight/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
 
   setMotorTimeout(0);
 }
@@ -33,8 +33,8 @@ void flexMvmtR(float distanceLeft, float distanceRight, int speedPCT, int timeSe
 void flexMvmtL(float distanceLeft, float distanceRight, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
 
-  rightWheels.rotateFor(directionType::fwd, double(distanceRight/31.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
-  leftWheels.rotateFor(directionType::fwd, double(distanceLeft/31.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
+  rightWheels.rotateFor(directionType::fwd, double(distanceRight/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
+  leftWheels.rotateFor(directionType::fwd, double(distanceLeft/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
 }
 
 
@@ -43,8 +43,8 @@ void flexMvmtL(float distanceLeft, float distanceRight, int speedPCT, int timeSe
 void turnClockwise(float degree, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
 
-  leftWheels.rotateFor(directionType::fwd, double (degree/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,false);
-  rightWheels.rotateFor(directionType::rev, double (degree/31.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
+  leftWheels.rotateFor(directionType::fwd, double (degree/25.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,false);
+  rightWheels.rotateFor(directionType::rev, double (degree/25.9), rotationUnits::rev, double (speedPCT), velocityUnits::pct,true);
 
   setMotorTimeout(0);
 }
@@ -89,24 +89,51 @@ void beltControl(double time = 45, double speedPCT = 89)
   }
 }
 bool loweronce = true;
-void dirtyBeltControl(float rev, int speedPCT, int timeout){ 
-  setMotorTimeout(timeout);
+void dirtyBeltControl(double rotations, double speedPCT, int timeout){ 
+}
 
-  Belt.rotateFor(fwd, double (rev), rev, double (speedPCT), pct, false);  
-  wait(250, msec);
-  if(Belt.velocity(pct) != 0){
-    Belt.rotateFor(fwd, double (rev), rev, double (speedPCT), pct, false); 
-  }
-  else
-  {
-    if(loweronce){
-    bLiftAuton(0.17, 1);
-    loweronce = !loweronce;
+//Inertial Sensors
+float inertialAVG(){
+  float sum = 0;
+
+  sum = (fabs(inertialLeft.rotation(deg)) + fabs(inertialRight.rotation(deg)));
+  sum = sum /2;
+
+  return sum;
+}
+
+void inertialTurn(turnType dir, double speed, double degrees, double timeout){
+  inertialLeft.setRotation(0, deg);
+  inertialRight.setRotation(0, deg);
+
+  if(dir == right){
+    while(inertialAVG() < degrees){
+      leftWheels.spin(fwd, speed, pct);
+      rightWheels.spin(reverse, speed, pct);
+      // printf("current turn degree: %2f", inertialAVG());
+      // wait(5, msec);
+      // printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
     }
-    Belt.rotateFor(rev, double (1), rev, double (speedPCT), pct, false);  
-    wait(500, timeUnits::msec);
-    Belt.rotateFor(fwd, double (rev), rev, double (speedPCT), pct, false);
+    do{
+      leftWheels.spin(reverse, 10, pct);
+      rightWheels.spin(fwd, 10, pct);
+    }while(inertialAVG() > degrees);
+  }else if(dir == left){
+    while(inertialAVG() < degrees){
+      leftWheels.spin(reverse, speed, pct);
+      rightWheels.spin(fwd, speed, pct);
+      // printf("current turn degree: %2f", inertialAVG());
+      // wait(5, msec);
+      // printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
+    }
+    do{
+      leftWheels.spin(fwd, 10, pct);
+      rightWheels.spin(reverse, 10 , pct);
+    }while(inertialAVG() > degrees);
   }
-
-  setMotorTimeout(0);
+  printf("current turn degree: %2f", inertialAVG());
+  wait(5, msec);
+  printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
+  leftWheels.stop(hold);
+  rightWheels.stop(hold);
 }

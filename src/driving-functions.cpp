@@ -80,6 +80,7 @@ bool toggle = false;
 bool stopper = false;
 void liftToggle(){
   if(toggle){
+    controller1.rumble(".");
     latchDown.set(1);
   }else{
     latchDown.set(0);
