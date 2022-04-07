@@ -141,25 +141,98 @@ void inertialTurn(turnType dir, double speed, double degrees, double timeout){
   rightWheels.stop(hold);
 }
 
+void VisionTest2()
+{
+  int centerDonut = 33; 
+  int center = 122;
+  int OKerror = 50;
+  int targetCenterGoal = 0; int targetCenterDonut = 0;
+  bool isTrue = true; 
+  bool isTrueDONUT = true;
+  
+  double xScale = 480.0/310;//Scaling the vision sensor range to the V5 Brain Screen
+  double yScale = 240.0/212;
+  int x = 0; int y=0; int height =0; int width = 0;
+  while (true)
+  {
+    Brain.Screen.clearLine();
+    Brain.Screen.clearScreen();
+    Vision1.takeSnapshot(DONUT);
+    if (Vision1.largestObject.exists)
+    {
+      x = Vision1.largestObject.originX;
+      y = Vision1.largestObject.originY;
+      width = Vision1.largestObject.width;
+      height = Vision1.largestObject.height;
+      Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
+      Brain.Screen.setFillColor(color::purple);
+      Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
+
+        if(targetCenterDonut < (centerDonut - OKerror)) //If the object is to the left of center
+        {
+          //turn right
+          printf("Object is too much to the left\n");
+          // rightWheels.spin(fwd, 25, velocityUnits::pct);
+          // leftWheels.spin(reverse, 25, velocityUnits::pct);
+
+        } 
+        else if (targetCenterDonut > (centerDonut + OKerror)) //If the object is to the right of center
+        {
+          //turn left
+          printf("Object is too much to the left\n");
+          // rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
+          // leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
+        } 
+        else //The object is not to the right of center and not to the left of center
+        {
+          //turn stop
+          printf("Object is too much to the right\n");
+          leftWheels.stop(brakeType::brake);
+          rightWheels.stop(brakeType::brake);
+
+          if(width < 54)// && height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
+          {
+            //printf("[DONUT] Attempting to get close enough to donut\n");
+            printf("Object is not there\n");
+            //moveForward(-15,25,5);
+          }
+          else
+          {
+            printf("[DONUT] Attempt success: donut is close enough\n");
+            leftWheels.stop(brakeType::brake);
+            rightWheels.stop(brakeType::brake);
+            isTrueDONUT = false;
+          }
+        }
+    }
+    else
+    {
+      Brain.Screen.print("Vision Sensor: Color Signature Not Found!");
+    }
+    task::sleep(100);
+  }
+}
 
 //Vision sensor
-void visionSensorTest(string goalColor, double speed){
-  int center = 158;
+void visionSensorTest(string goalColor){
+  int centerDonut = 33; 
+  int center = 122;
   int OKerror = 50;
   double xScale = 480.0/310;//Scaling the vision sensor range to the V5 Brain Screen
   double yScale = 240.0/212;
-  int targetCenter = 0; int x = 0; int y=0; int height =0; int width = 0;
+  int targetCenterGoal = 0; int targetCenterDonut = 0; int x = 0; int y=0; int height =0; int width = 0;
   bool isTrue = true; 
+  bool isTrueDONUT = true;
   string Hue = goalColor;
-
-  if(Hue == "Red"){
-    while(isTrue){
+  moveForward(-30, 30, 5);
+    while(isTrueDONUT)
+    {
       Brain.Screen.clearLine();
       Brain.Screen.clearScreen();
-      Vision1.takeSnapshot(RED_GOAL);
+      Vision1.takeSnapshot(DONUT);
       if (Vision1.largestObject.exists)
       {
-        targetCenter = Vision1.largestObject.centerX;
+        targetCenterDonut = Vision1.largestObject.centerX;
         x = Vision1.largestObject.originX;
         y = Vision1.largestObject.originY;
         width = Vision1.largestObject.width;
@@ -167,29 +240,23 @@ void visionSensorTest(string goalColor, double speed){
         height = Vision1.largestObject.height;
         printf("height: %d\n", height);
         Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
-        if(Vision1.takeSnapshot(BLUE_GOAL) == Vision1.takeSnapshot(BLUE_GOAL))
-        {
-          Brain.Screen.setFillColor(color::blue);
-        }
-        else if(Vision1.takeSnapshot(RED_GOAL) == Vision1.takeSnapshot(RED_GOAL))
-        {
-          Brain.Screen.setFillColor(color::red);
-        }
+        Brain.Screen.setFillColor(color::purple);
         Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
         
-        if(targetCenter < (center - OKerror)) //If the object is to the left of center
+
+        if(targetCenterDonut < (centerDonut - OKerror)) //If the object is to the left of center
         {
           //turn right
-          rightWheels.spin(fwd, speed, velocityUnits::pct);
-          leftWheels.spin(reverse, speed, velocityUnits::pct);
+          rightWheels.spin(fwd, 5, velocityUnits::pct);
+          leftWheels.spin(reverse, 5, velocityUnits::pct);
           // rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
           // leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
         } 
-        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
+        else if (targetCenterDonut > (centerDonut + OKerror)) //If the object is to the right of center
         {
           //turn left
-          rightWheels.spin(directionType::rev, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::fwd, speed, velocityUnits::pct);
+          rightWheels.spin(directionType::rev, 5, velocityUnits::pct);
+          leftWheels.spin(directionType::fwd, 5, velocityUnits::pct);
           // rightWheels.spin(directionType::fwd, 25, velocityUnits::pct);
           // leftWheels.spin(directionType::rev, 25, velocityUnits::pct);
         } 
@@ -199,94 +266,144 @@ void visionSensorTest(string goalColor, double speed){
           leftWheels.stop(brakeType::brake);
           rightWheels.stop(brakeType::brake);
 
-          if(width < 263+OKerror && height < 145+OKerror) //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
-          {
-            printf("Attempting to get close enough to goal\n");
-            moveForward(-15,25,5);
-          }
-          else
-          {
-            printf("Attempt success: goal is close enough\n");
-            leftWheels.stop(brakeType::brake);
-            rightWheels.stop(brakeType::brake);
-            isTrue = false;
-          }
-        }
-      }
-      else
-      {
-        Brain.Screen.print("Vision Sensor: Color Signature Not Found!");
-        turnClockwise(15, 15, 3);
-      }
-    task::sleep(100);
-    }
-  }else if(Hue == "Blue"){
-      while(isTrue){
-      Brain.Screen.clearLine();
-      Brain.Screen.clearScreen();
-      Vision1.takeSnapshot(BLUE_GOAL);
-      if (Vision1.largestObject.exists)
-      {
-        targetCenter = Vision1.largestObject.centerX;
-        x = Vision1.largestObject.originX;
-        y = Vision1.largestObject.originY;
-        width = Vision1.largestObject.width;
-        printf("width: %d\n", width);
-        height = Vision1.largestObject.height;
-        printf("height: %d\n", height);
-        Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
-        if(Vision1.takeSnapshot(RED_GOAL) == Vision1.takeSnapshot(BLUE_GOAL))
-        {
-          Brain.Screen.setFillColor(color::blue);
-        }
-        else if(Vision1.takeSnapshot(RED_GOAL) == Vision1.takeSnapshot(RED_GOAL))
-        {
-          Brain.Screen.setFillColor(color::red);
-        }
-        Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
         
-        if(targetCenter < (center - OKerror)) //If the object is to the left of center
-        {
-          //turn right
-          rightWheels.spin(directionType::rev, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-        } 
-        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
-        {
-          //turn left
-          rightWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::rev, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::rev, 25, velocityUnits::pct);
-        } 
-        else //The object is not to the right of center and not to the left of center
-        {
-          //turn stop
-          leftWheels.stop(brakeType::brake);
-          rightWheels.stop(brakeType::brake);
-
-          if(width < 263+OKerror && height < 145+OKerror) //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
+          if((x < 100-5 || x >  100+5 ) && (y < 140-5 || y>140+5)) //if(width < 50)// && height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
           {
-            printf("Attempting to get close enough to goal\n");
+            printf("[DONUT] Attempting to get close enough to donut\n");
             moveForward(-15,25,5);
           }
           else
           {
-            printf("Attempt success: goal is close enough\n");
+            printf("[DONUT] Attempt success: donut is close enough\n");
             leftWheels.stop(brakeType::brake);
             rightWheels.stop(brakeType::brake);
-            isTrue = false;
+            isTrueDONUT = false;
           }
         }
       }
       else
       {
         Brain.Screen.print("Vision Sensor: Color Signature Not Found!");
-        turnClockwise(15, 15, 3);
+        printf("Not detecting donut\n");
+        turnClockwise(5, 15, 3);
       }
-    task::sleep(100);
+      task::sleep(100);
     }
-  }
+
+  // if(Hue == "Red"){
+  //   while(isTrue){
+  //     Brain.Screen.clearLine();
+  //     Brain.Screen.clearScreen();
+  //     Vision1.takeSnapshot(RED_GOAL);
+  //     if (Vision1.largestObject.exists)
+  //     {
+  //       targetCenterGoal = Vision1.largestObject.centerX;
+  //       x = Vision1.largestObject.originX;
+  //       y = Vision1.largestObject.originY;
+  //       width = Vision1.largestObject.width;
+  //       printf("width: %d\n", width);
+  //       height = Vision1.largestObject.height;
+  //       printf("height: %d\n", height);
+  //       Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
+  //       Brain.Screen.setFillColor(color::red);
+  //       Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
+        
+  //       if(targetCenterGoal < (center - OKerror)) //If the object is to the left of center
+  //       {
+  //         //turn right
+  //           rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
+  //           leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
+  //       } 
+  //       else if (targetCenterGoal > (center + OKerror)) //If the object is to the right of center
+  //       {
+  //         //turn left
+  //         rightWheels.spin(directionType::fwd, 25, velocityUnits::pct);
+  //         leftWheels.spin(directionType::rev, 25, velocityUnits::pct);
+  //       } 
+  //       else //The object is not to the right of center and not to the left of center
+  //       {
+  //         //turn stop
+  //         leftWheels.stop(brakeType::brake);
+  //         rightWheels.stop(brakeType::brake);
+
+  //         if(width < 195+OKerror)// && height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
+  //         {
+  //           printf("[GOAL] Attempting to get close enough to goal\n");
+  //           moveForward(-15,25,5);
+  //         }
+  //         else
+  //         {
+  //           printf("[GOAL] Attempt success: goal is close enough\n");
+  //           leftWheels.stop(brakeType::brake);
+  //           rightWheels.stop(brakeType::brake);
+  //           isTrue = false;
+  //         }
+  //       }
+  //     }
+  //     else
+  //     {
+  //       Brain.Screen.print("Vision Sensor: Color Signature Not Found!");
+  //       turnClockwise(15, 15, 3);
+  //     }
+  //   task::sleep(100);
+  //   }
+  // }else if(Hue == "Blue"){
+  //     while(isTrue){
+  //     Brain.Screen.clearLine();
+  //     Brain.Screen.clearScreen();
+  //     Vision1.takeSnapshot(BLUE_GOAL);
+  //     if (Vision1.largestObject.exists)
+  //     {
+  //       targetCenterGoal = Vision1.largestObject.centerX;
+  //       x = Vision1.largestObject.originX;
+  //       y = Vision1.largestObject.originY;
+  //       width = Vision1.largestObject.width;
+  //       printf("width: %d\n", width);
+  //       height = Vision1.largestObject.height;
+  //       printf("height: %d\n", height);
+  //       Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
+  //       Brain.Screen.setFillColor(color::blue);
+  //       Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
+        
+  //       if(targetCenterGoal < (center - OKerror)) //If the object is to the left of center
+  //       {
+  //         //turn right
+  //         rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
+  //         leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
+  //       } 
+  //       else if (targetCenterGoal > (center + OKerror)) //If the object is to the right of center
+  //       {
+  //         //turn left
+  //         rightWheels.spin(directionType::fwd, 25, velocityUnits::pct);
+  //         leftWheels.spin(directionType::rev, 25, velocityUnits::pct);
+  //       } 
+  //       else //The object is not to the right of center and not to the left of center
+  //       {
+  //         //turn stop
+  //         leftWheels.stop(brakeType::brake);
+  //         rightWheels.stop(brakeType::brake);
+
+  //         if(width < 184+OKerror) //&& height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
+  //         {
+  //           printf("[GOAL] Attempting to get close enough to goal\n");
+  //           moveForward(-15,25,5);
+  //         }
+  //         else
+  //         {
+  //           printf("[GOAL] Attempt success: goal is close enough\n");
+  //           leftWheels.stop(brakeType::brake);
+  //           rightWheels.stop(brakeType::brake);
+  //           isTrue = false;
+  //         }
+  //       }
+  //     }
+  //     else
+  //     {
+  //       Brain.Screen.print("Vision Sensor: Color Signature Not Found!");
+  //       turnClockwise(15, 15, 3);
+  //     }
+  //   task::sleep(100);
+  //   }
+  // }
 }
+

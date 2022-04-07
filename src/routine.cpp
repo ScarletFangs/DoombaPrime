@@ -13,6 +13,7 @@ timer internalTimer;
 //latchDown.set(1);
 //bLiftAuton(1.25, 1) down  bLiftAuton(0.5, 1) up
 
+
 void rampFront(){
   //get yellow goal
   latchDown.set(1);

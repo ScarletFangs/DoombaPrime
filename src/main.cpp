@@ -37,8 +37,13 @@ void userControl(){
     changespeed();
   }
 }
+
+
+
+
 void Autonomous(){
-  visionSensorTest("Red", 20);
+  //VisionTest2();
+  visionSensorTest("Red");
   //rampFront();
   //rampSafe();
 }

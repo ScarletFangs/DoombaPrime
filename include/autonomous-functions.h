@@ -31,6 +31,7 @@ float inertialAVG();
 void inertialTurn(vex::turnType dir, double speed, double degrees, double timeout);
 
 //Vision sensor
-void visionSensorTest(std::string goalColor, double speed);
+void VisionTest2();
+void visionSensorTest(std::string goalColor);
 
 #endif
