@@ -17,10 +17,11 @@
 #include "routine.h"
 //-----NEW-----
 #include "customMenu.h"
-#include "GPS.h"
-#include "GPSRoutine.h"
+// #include "GPS.h"
+// #include "GPSRoutine.h"
+// #include "visionSensor.h"
 //-------------
-#include "autonSkills.h"
+//#include "autonSkills.h"
 
 using namespace vex;
 competition Competition;
@@ -37,7 +38,8 @@ void userControl(){
   }
 }
 void Autonomous(){
-  rampFront();
+  visionSensorTest("Red", 20);
+  //rampFront();
   //rampSafe();
 }
 

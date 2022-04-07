@@ -1,5 +1,6 @@
 #ifndef ROBOT_CONFIG
 #define ROBOT_CONFIG
+
 using namespace vex;
 
 extern brain Brain;
@@ -50,7 +51,6 @@ extern motor Belt;
 extern motor bLift1;
 extern motor bLift2;
 extern motor_group bLift;
-
 
 void vexcodeInit(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);

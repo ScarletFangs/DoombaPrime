@@ -1,5 +1,6 @@
-#ifndef AUTONOMOUS_FUNCTIONS
+#ifndef AUTONOMOUS_FUNCTOINS
 #define AUTONOMOUS_FUNCTIONS
+
 
 //Timeout function: time to do command until motor stops
 void setMotorTimeout(int timeSeconds);
@@ -29,5 +30,7 @@ void dirtyBeltControl(float, double, int);
 float inertialAVG();
 void inertialTurn(vex::turnType dir, double speed, double degrees, double timeout);
 
+//Vision sensor
+void visionSensorTest(std::string goalColor, double speed);
 
 #endif
