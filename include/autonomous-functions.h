@@ -21,6 +21,8 @@ void liftAuton(float, int, int);
 //Move back lift
 void bLiftAuton(float, int);
 
+void bLiftAuton2(float degree, int speedPCT, int timeSec);
+
 //Belt
 void beltControl(double, double);
 
@@ -31,9 +33,7 @@ float inertialAVG();
 void inertialTurn(vex::turnType dir, double speed, double degrees, double timeout);
 
 //Vision sensor
-void VisionTest2();
 void visionSensorTest(std::string goalColor);
 
-void visionMovement(int);
 void printing(int);
 #endif
