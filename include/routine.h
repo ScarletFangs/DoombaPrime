@@ -3,9 +3,12 @@
 #define ROUTINE
 
 //Routines-----------------
-void rampFront();
+void rampFrontRed();
+void rampFrontBlue();
 
 void rampSafe();
+
+void goalTest();
 
 void skillsAuton();
 

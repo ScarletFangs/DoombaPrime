@@ -48,8 +48,8 @@ using namespace vex;
 #define GOALSIDE				0
 #define RAMPSIDE			  1
 #define SKILLS		      2
-#define ARCADE			    0
-#define TANK				    1
+#define TANK	  		    0
+#define ARCADE				  1
 #define AUTON_COLOR			0
 #define AUTON_TYPE			1
 #define AUTON_DRIVE			2

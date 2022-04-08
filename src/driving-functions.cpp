@@ -47,7 +47,7 @@ bool speedtoggle = false;
 bool speedstopper = false;
 void changespeed(){
   if(speedtoggle){
-    speed = 0.4;
+    speed = 0.6;
   }else{
     speed = 0.85;
   }
@@ -69,7 +69,7 @@ void liftControl(){
   if(controller1.ButtonR1.pressing()){
     lift.spin(fwd, 55.0, pct);
   }else if(controller1.ButtonR2.pressing()){
-    lift.spin(reverse, 30.0, pct);
+    lift.spin(reverse, 65.0, pct);
   }else{
     lift.stop(hold);
   }
@@ -113,7 +113,7 @@ void beltControl(){
   }
 
   if(belttoggle){
-    Belt.spin(fwd, 89, pct);
+    Belt.spin(fwd, 100, pct);  //95
   }else{
     Belt.stop(coast);
   }

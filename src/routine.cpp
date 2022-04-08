@@ -14,7 +14,7 @@ timer internalTimer;
 //bLiftAuton(1.25, 1) down  bLiftAuton(0.5, 1) up
 
 
-void rampFront(){
+void rampFrontRed(){
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
@@ -25,10 +25,36 @@ void rampFront(){
 
   //get personal
   inertialTurn(left, 30, 80, 5);
-  moveForward(40, 10, 2);
-  bLiftAuton(1.1, 1);
-  flexMvmtL(-25, -60, 15, 5);
-  bLiftAuton(0.6, 1);
+  // moveForward(40, 10, 2);
+  // bLiftAuton(1.1, 1);
+  // flexMvmtL(-25, -60, 15, 5);
+  // bLiftAuton(0.6, 1);
+  visionMovement(1);
+  bLiftAuton(-0.8, 1);
+  bLiftAuton(0.2, 1);
+  bLiftAuton(-0.2, 1);
+  moveForward(20, 10, 1);
+}
+void rampFrontBlue(){
+  //get yellow goal
+  latchDown.set(1);
+  liftAuton(0, 10, 5);
+  moveForward(120, 100, 5);
+  latchDown.set(0);
+  moveForward(-120, 100, 10000);
+  wait(1, sec);
+
+  //get personal
+  inertialTurn(left, 30, 80, 5);
+  // moveForward(40, 10, 2);
+  // bLiftAuton(1.1, 1);
+  // flexMvmtL(-25, -60, 15, 5);
+  // bLiftAuton(0.6, 1);
+  visionMovement(2);
+  bLiftAuton(-0.8, 1);
+  bLiftAuton(0.2, 1);
+  bLiftAuton(-0.2, 1);
+  moveForward(20, 10, 1);
 }
 
 void rampSafe(){
@@ -43,6 +69,13 @@ void rampSafe(){
   }while(internalTimer.time() > 5000);
 }
 
+void goalTest(){
+  visionMovement(1);
+  bLiftAuton(-0.8, 1);
+  bLiftAuton(0.2, 1);
+  bLiftAuton(-0.2, 1);
+  moveForward(20, 10, 1);
+}
 void skillsAuton(){
   // //1push then grab yellow to other side
   // latchDown.set(1);   //open

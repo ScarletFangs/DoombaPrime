@@ -225,6 +225,7 @@ void visionSensorTest(string goalColor){
   bool isTrueDONUT = true;
   string Hue = goalColor;
   moveForward(-30, 30, 5);
+ 
     while(isTrueDONUT)
     {
       Brain.Screen.clearLine();
@@ -407,3 +408,107 @@ void visionSensorTest(string goalColor){
   // }
 }
 
+void visionMovement(int aim){
+  int OKerror = 15; //25 
+  int targetCenter = 0; int x = 0; int y=0; int height =0; int width = 0;
+  int center;
+  bool runOnce = true;
+  bool afterInitial = false;
+
+  while(runOnce){
+    switch(aim){
+      case 1:
+        Vision1.takeSnapshot(RED_GOAL);
+        center = 120; //120
+        break;
+      case 2:
+        Vision1.takeSnapshot(BLUE_GOAL);
+        center = 120;
+        break;
+      case 3:
+        Vision1.takeSnapshot(DONUT);
+        center = 33;
+        break;
+    }
+
+    if(Vision1.largestObject.exists){
+        targetCenter = Vision1.largestObject.centerX;
+        //printf("target center: %d\n", targetCenter);
+        x = Vision1.largestObject.originX;
+        //printf("center x: %d\n", Vision1.largestObject.originX);
+        y = Vision1.largestObject.originY;
+        //printf("center y: %d\n", Vision1.largestObject.originY);
+        // width = Vision1.largestObject.width;
+        // height = Vision1.largestObject.height;
+      if(targetCenter < (center - OKerror)){
+        //If the object is to the left of center
+        rightWheels.spin(fwd, 5, pct);
+        leftWheels.spin(reverse, 5, pct);
+        printf("[GOAL] Object to the left... adjusting... \n");
+      }else if(targetCenter > (center - OKerror)){
+        //If the object is to the right of center
+        rightWheels.spin(reverse, 5, pct);
+        leftWheels.spin(fwd, 5, pct);
+        if(afterInitial){
+          if((targetCenter > 120) && (targetCenter < 126)){
+          printf("[DONUT] Success: in adjusting loop\n");
+          leftWheels.stop();
+          rightWheels.stop();
+          runOnce = false;
+          }
+        }
+        printf("[GOAL] Object to the right... adjusting... \n");
+      }else{
+        //moving closer to target
+        if((targetCenter > 82) && (targetCenter < 104)){
+          printf("[DONUT] Attempting to get closer\n");
+          moveForward(-20, 25, 1);
+          afterInitial = true;
+          if((targetCenter > 120) && (targetCenter < 126)){
+          printf("[DONUT] Success: in moving forward loop\n");
+          leftWheels.stop();
+          rightWheels.stop();
+          runOnce = false;
+          }
+        }
+      }
+    }else{
+      printf("target not found\n");
+      turnClockwise(-10, 20, 5);
+    }
+    wait(10, msec);
+  }
+}
+
+void printing(int aim){
+  int x = 0; int y = 0;
+  int center = 0;
+  int targetCenter = 0;
+  bool runOnce = true;
+
+   while(runOnce){
+      switch(aim){
+        case 1:
+          Vision1.takeSnapshot(RED_GOAL);
+          center = 122;
+          break;
+        case 2:
+          Vision1.takeSnapshot(BLUE_GOAL);
+          center = 122;
+          break;
+        case 3:
+          Vision1.takeSnapshot(DONUT);
+          center = 33;
+          break;
+      }
+
+      if(Vision1.largestObject.exists){
+          targetCenter = Vision1.largestObject.centerX;
+          x = Vision1.largestObject.originX;
+          printf("center x: %d\n", Vision1.largestObject.originX);
+          y = Vision1.largestObject.originY;
+          printf("center y: %d\n", Vision1.largestObject.originY);
+      }
+      wait( 10, msec);
+   }
+}

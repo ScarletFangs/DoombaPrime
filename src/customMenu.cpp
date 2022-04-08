@@ -41,8 +41,8 @@ string menuTypes[maxMenus]{
 
 string menuOptions[maxMenus][maxOptions]{
   {"Blue", "Red", ""},
-  {"Goalside", "Rampside", "Skills"},
-  {"Arcade", "Tank", ""}
+  {"FrontGoal", "Safe", "Skills"},
+  {"Tank", "Arcade", ""}
 };
 
 //-------------------------------------------------------------------------------
