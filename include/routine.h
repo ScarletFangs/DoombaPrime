@@ -3,6 +3,9 @@
 #define ROUTINE
 
 //Routines-----------------
+void goalFrontBlue();
+void goalFrontRed();
+
 void rampFrontRed();
 void rampFrontBlue();
 

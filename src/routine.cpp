@@ -12,20 +12,47 @@ timer internalTimer;
 
 //latchDown.set(1);
 //bLiftAuton(1.25, 1) down  bLiftAuton(0.5, 1) up
+void goalFrontBlue()
+{
+  internalTimer.reset();
+  //get yellow goal
+  latchDown.set(1);
+  liftAuton(0, 10, 5);
+  moveForward(78, 100, 5);
+  latchDown.set(0);
+  moveForward(-55, 100, 10000);
+  wait(1, sec);
 
+  // //get personal
+  //inertialTurn(left, 20, 90, 5);   //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
+  turnClockwise(-20, 15, 5);
+  moveForward(15, 10, 1);
+  bLiftAuton2(28, 50, 1); //down
+  visionSensorTest("Blue");
+  bLiftAuton2(-30, 50, 1);  //up
+  moveForward(20, 10, 1); //uncomment this
+  do{
+    Belt.spin(fwd, 95, pct);
+  }while(internalTimer > 30000);
+}
+
+void goalFrontRed()
+{
+
+}
 
 void rampFrontRed(){
   internalTimer.reset();
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(120, 100, 5);
+  moveForward(76, 100, 5);
   latchDown.set(0);
-  moveForward(-110, 100, 10000);
+  moveForward(-75, 100, 10000);
   wait(1, sec);
 
   // //get personal
-  inertialTurn(left, 30, 80, 5);
+  inertialTurn(left, 20, 90, 5);  //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
   moveForward(10, 10, 1);
   bLiftAuton2(28, 50, 1); //down
   visionSensorTest("Red");

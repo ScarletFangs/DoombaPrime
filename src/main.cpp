@@ -44,8 +44,8 @@ void Autonomous(){
   //visionSensorTest("Red");
   //rampFront();
   //rampFrontBlue();
-  rampFrontRed();
-
+  //rampFrontRed();
+  goalFrontBlue();
   //rampSafe();
 }
 

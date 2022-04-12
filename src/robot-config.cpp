@@ -11,15 +11,15 @@ controller controller2(partner);
 
 //Driving motors
 //new config after chains:
-motor left1(PORT20, ratio18_1, true); //new front
-motor left2(PORT12, ratio18_1, true); //new back
+motor left1(PORT20, ratio18_1, false); //new front
+motor left2(PORT12, ratio18_1, false); //new back
 //old configs not used:
 // motor left3(PORT1, ratio18_1, false); //bottom row
 // motor left4(PORT4, ratio18_1, true); //top row
 
 //new config after chains:
-motor right1(PORT11, ratio18_1, false); //new front
-motor right2(PORT10, ratio18_1, false); //new back
+motor right1(PORT11, ratio18_1, true); //new front
+motor right2(PORT10, ratio18_1, true); //new back
 //old configs not used:
 // motor right3(PORT7, ratio18_1, true); //front
 // motor right4(PORT19, ratio18_1, false);
