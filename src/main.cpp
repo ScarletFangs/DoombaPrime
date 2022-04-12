@@ -41,9 +41,10 @@ void userControl(){
 
 void Autonomous(){
   //VisionTest2();
-  visionSensorTest("Blue");
+  //visionSensorTest("Red");
   //rampFront();
-  rampFrontBlue();
+  //rampFrontBlue();
+  rampFrontRed();
 
   //rampSafe();
 }

@@ -10,19 +10,23 @@ controller controller1(primary);
 controller controller2(partner);
 
 //Driving motors
-motor left1(PORT1, ratio18_1, false); //bottom row
-motor left2(PORT20, ratio18_1, true); //front
-motor left3(PORT4, ratio18_1, true); //top row
-motor left4(PORT12, ratio18_1, true);
+//new config after chains:
+motor left1(PORT20, ratio18_1, true); //new front
+motor left2(PORT12, ratio18_1, true); //new back
+//old configs not used:
+// motor left3(PORT1, ratio18_1, false); //bottom row
+// motor left4(PORT4, ratio18_1, true); //top row
 
-motor right1(PORT10, ratio18_1, false); //bottom row
-motor right2(PORT7, ratio18_1, true); //front
-motor right3(PORT11, ratio18_1, false); //top row
-motor right4(PORT19, ratio18_1, false);
+//new config after chains:
+motor right1(PORT11, ratio18_1, false); //new front
+motor right2(PORT10, ratio18_1, false); //new back
+//old configs not used:
+// motor right3(PORT7, ratio18_1, true); //front
+// motor right4(PORT19, ratio18_1, false);
 
 //Motor Groups
-motor_group leftWheels(left1, left2, left3, left4);
-motor_group rightWheels(right1, right2, right3, right4);
+motor_group leftWheels(left1, left2);
+motor_group rightWheels(right1, right2);
 
 //4 Bar motor
 motor liftL1(PORT3, ratio36_1, false);
