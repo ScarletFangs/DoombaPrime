@@ -36,4 +36,7 @@ void inertialTurn(vex::turnType dir, double speed, double degrees, double timeou
 void visionSensorTest(std::string goalColor, double speed);
 
 void printing(int);
+
+void visionHeightWidthCheck();
+
 #endif

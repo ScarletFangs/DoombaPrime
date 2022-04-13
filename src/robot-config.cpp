@@ -32,7 +32,7 @@ motor_group rightWheels(right1, right2);
 motor liftL1(PORT3, ratio36_1, false);
 motor liftL2(PORT5, ratio36_1, false);
 motor liftR1(PORT8, ratio36_1, true);
-motor liftR2(PORT6, ratio36_1, true);
+motor liftR2(PORT7, ratio36_1, true);
 
 motor_group lift(liftL1, liftL2, liftR1, liftR2);
 

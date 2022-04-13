@@ -27,86 +27,95 @@ using namespace vex;
 competition Competition;
 
 // // Without Menu
-void userControl(){
-  while(1){
-    tankDrive();
-    liftControl();
-    liftToggle();
-    bLiftManual();
-    beltControl();
-    changespeed();
-  }
-}
+// void userControl(){
+//   while(1){
+//     tankDrive();
+//     liftControl();
+//     liftToggle();
+//     bLiftManual();
+//     beltControl();
+//     changespeed();
+//   }
+// }
 
 
-void Autonomous(){
-  //VisionTest2();
-  //visionSensorTest("Red");
-  //rampFront();
-  //rampFrontBlue();
-  //rampFrontRed();
-  goalFrontBlue();
-  //rampSafe();
-}
+// void Autonomous(){
+//   //VisionTest2();
+//   //visionSensorTest("Red");
+//   //rampFront();
+//   rampFrontBlue();
+//   //rampFrontRed();
+//   //goalFrontBlue();
+  
+//   //visionHeightWidthCheck();
+//   //rampSafe();
+// }
 
 //---Menu---
-// int tempStatus = 0;
-// void menuSetup(){
-//   menuCONFIG();
-//   notificationHUD("Robot: OK");
-// }
-// void Autonomous(){
-//   if(getValues(AUTON_COLOR)== BLUE){
-//     if(getValues(AUTON_TYPE) == GOALSIDE){
-//       rampFrontBlue();
-//       printf("goal side auton");
-//     }else if(getValues(AUTON_TYPE) == RAMPSIDE){
-//       rampSafe();
-//       printf("ramp side auton");
-//     }else if(getValues(AUTON_TYPE) == SKILLS){
-//       //skillsAuton();
-//       printf("skills");
-//     }
-//     notificationHUD("Auton: Done");
-//   }
-//   else if(getValues(AUTON_COLOR) == RED){
-//     if(getValues(AUTON_TYPE) == GOALSIDE){
-//       rampFrontRed();
-//       printf("REDgoal side auton");
-//     }else if(getValues(AUTON_TYPE) == RAMPSIDE){
-//       rampSafe();
-//       printf("ramp side auton");
-//     }else if(getValues(AUTON_TYPE) == SKILLS){
-//       //skillsAuton();
-//       printf("skills");
-//     }
-//     notificationHUD("Auton: Done");
-//   }
-// }
-//   void userControl(){
-//     Brain.Screen.clearScreen(green);
-//     while(1){
-//       if(getValues(AUTON_DRIVE) == ARCADE){
-//         arcadeDrive();
-//         liftToggle();
-//         liftControl();
-//         beltControl();
-//         bLiftControl();
-//       }else if(getValues(AUTON_DRIVE) == TANK){
-//         tankDrive();
-//         liftControl();
-//         liftToggle();
-//         bLiftManual();
-//         beltControl();
-//         changespeed();
-//       }
-//     }
-// }
+int tempStatus = 0;
+void menuSetup(){
+  menuCONFIG();
+  notificationHUD("Robot: OK");
+}
+void Autonomous(){
+  if(getValues(AUTON_COLOR)== BLUE){
+    if(getValues(AUTON_TYPE) == GOALSIDE){
+      //Nate 04/12/2022 update
+      goalFrontBlue();
 
-// void pre_auton (void){
-//   menuCONFIG();
-//   notificationHUD("Robot: OK");
-// }
+      //rampFrontBlue();
+      printf("goal side auton");
+    }else if(getValues(AUTON_TYPE) == RAMPSIDE){
+      //Nate 04/12/2022 update
+      rampFrontBlue();
+
+      //Old Code. Nate comment this out on 04/12/2022
+      //rampSafe();
+      printf("ramp side auton");
+    }else if(getValues(AUTON_TYPE) == SKILLS){
+      //skillsAuton();
+      printf("skills");
+    }
+    notificationHUD("Auton: Done");
+  }
+  else if(getValues(AUTON_COLOR) == RED){
+    if(getValues(AUTON_TYPE) == GOALSIDE){
+      rampFrontRed();
+      printf("REDgoal side auton");
+    }else if(getValues(AUTON_TYPE) == RAMPSIDE){
+      rampSafe();
+      printf("ramp side auton");
+    }else if(getValues(AUTON_TYPE) == SKILLS){
+      //skillsAuton();
+      printf("skills");
+    }
+    notificationHUD("Auton: Done");
+  }
+}
+  void userControl(){
+    Brain.Screen.clearScreen(green);
+    while(1){
+      if(getValues(AUTON_DRIVE) == ARCADE){
+        arcadeDrive();
+        liftToggle();
+        liftControl();
+        beltControl();
+        bLiftControl();
+      }else if(getValues(AUTON_DRIVE) == TANK){
+        tankDrive();
+        liftControl();
+        liftToggle();
+        bLiftManual();
+        beltControl();
+        changespeed();
+      }
+    }
+}
+
+void pre_auton (void){
+  menuCONFIG();
+  notificationHUD("Robot: OK");
+}
 
 
 int main() {
