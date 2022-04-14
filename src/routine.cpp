@@ -10,8 +10,9 @@
 using namespace vex;
 timer internalTimer;
 
-//latchDown.set(1);
-//bLiftAuton(1.25, 1) down  bLiftAuton(0.5, 1) up
+/* -----------------------------------*/
+//GOALSIDE
+/* -----------------------------------*/
 void goalFrontBlue()
 {
   internalTimer.reset();
@@ -70,6 +71,9 @@ void goalFrontRed()
   }while(internalTimer > 30000);
 }
 
+/* -----------------------------------*/
+//RAMPSIDE
+/* -----------------------------------*/
 void rampFrontRed(){
   internalTimer.reset();
   //get yellow goal
@@ -77,33 +81,41 @@ void rampFrontRed(){
   liftAuton(0, 10, 5);
   moveForward(76, 100, 5);
   latchDown.set(0);
-  moveForward(-75, 100, 10000);
+  //moveForward(-110, 100, 10000); //initially we just move backward hard code
+
+  //newly added. allign using vision sensor
+  moveForward(-40, 30, 10000);    //-40, 30, 10000
+  liftAuton(2, 10, 1);
+  visionSensorTest("Purple", 10);
   wait(1, sec);
 
   // //get personal
-  inertialTurn(left, 20, 90, 5);  //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
+  inertialTurn(left, 15, 90, 5);
+  //turnClockwise(-15, 15, 5); //perfect is 15
   moveForward(10, 10, 1);
   bLiftAuton2(28, 50, 1); //down
-  visionSensorTest("Red", 20);
-  bLiftAuton2(-30, 50, 1);  //up
-  moveForward(20, 10, 1); //uncomment this
+  visionSensorTest("Red", 10);
+  moveForward(-7, 10, 1);
+  bLiftAuton2(-30.2, 50, 1);  //up
+  moveForward(20, 10, 1);
   do{
-    Belt.spin(fwd, 95, pct);
-  }while(internalTimer > 30000);
+    Belt.spin(fwd, 90, pct);
+  }while((internalTimer > 30000) && (internalTimer < 45000));
+
 }
 void rampFrontBlue(){
   internalTimer.reset();
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(120, 100, 5);
+  moveForward(76, 100, 5);
   latchDown.set(0);
   //moveForward(-110, 100, 10000); //initially we just move backward hard code
 
   //newly added. allign using vision sensor
   moveForward(-40, 30, 10000);
   liftAuton(2, 10, 1);
-  visionSensorTest("Purple", 5);
+  visionSensorTest("Purple", 10);
   wait(1, sec);
 
   // //get personal
@@ -111,15 +123,19 @@ void rampFrontBlue(){
   turnClockwise(-15, 15, 5); //perfect is 15
   moveForward(10, 10, 1);
   bLiftAuton2(28, 50, 1); //down
-  visionSensorTest("Blue", 5);
+  visionSensorTest("Blue", 10);
   moveForward(-7, 10, 1);
   bLiftAuton2(-30.2, 50, 1);  //up
   moveForward(20, 10, 1);
+
   do{
     Belt.spin(fwd, 90, pct);
   }while((internalTimer > 30000) && (internalTimer < 45000));
 }
 
+/* -----------------------------------*/
+//OTHERS
+/* -----------------------------------*/
 void rampSafe(){
   internalTimer.reset();
 
@@ -132,11 +148,10 @@ void rampSafe(){
   }while(internalTimer.time() > 5000);
 }
 
-void goalTest(){
-  bLiftAuton(-0.8, 1);
-  bLiftAuton(0.2, 1);
-  bLiftAuton(-0.2, 1);
-  moveForward(20, 10, 1);
+void sensorTest(){
+  bLiftAuton2(28, 50, 1);
+  wait(1, sec);
+  bLiftAuton2(-30, 50, 1);
 }
 void skillsAuton(){
   // //1push then grab yellow to other side

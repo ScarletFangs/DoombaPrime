@@ -23,6 +23,17 @@ void moveForward(float distanceCM, int speedPCT, int timeSec){
 
   setMotorTimeout(0);
 }
+void moveForwardCoast(float distanceCM, int speedPCT, int timeSec){
+  setMotorTimeout(timeSec);
+
+  leftWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
+  rightWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
+
+  leftWheels.stop(coast);
+  rightWheels.stop(coast);
+  
+  setMotorTimeout(0);
+}
 //Drive forward with flex input (turning right based off front side)(*if rightWheel distance bigger)
 void flexMvmtR(float distanceLeft, float distanceRight, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
@@ -123,41 +134,31 @@ void inertialTurn(turnType dir, double speed, double degrees, double timeout){
   inertialLeft.setRotation(0, deg);
   inertialRight.setRotation(0, deg);
 
-  if(dir == right)
-  {
-    while(inertialAVG() < degrees)
-    {
+  if(dir == right){
+    while(inertialAVG() < degrees){
       leftWheels.spin(fwd, speed, pct);
       rightWheels.spin(reverse, speed, pct);
-      // printf("current turn degree: %2f", inertialAVG());
-      // wait(5, msec);
-      // printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
+      //printf("current turn degree: %2f", inertialAVG());
+      //wait(5, msec);
+      //printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
     }
-    do
-    {
+    do{
       leftWheels.spin(reverse, 10, pct);
       rightWheels.spin(fwd, 10, pct);
-    }
-    while(inertialAVG() > degrees);
-  }
-  else if(dir == left)
-  {
-    while(inertialAVG() < degrees)
-    {
+    }while(inertialAVG() > degrees);
+  }else if(dir == left){
+    while(inertialAVG() < degrees){
       leftWheels.spin(reverse, speed, pct);
       rightWheels.spin(fwd, speed, pct);
-      // printf("current turn degree: %2f", inertialAVG());
-      // wait(5, msec);
-      // printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
+      //printf("current turn degree: %2f", inertialAVG());
+      //wait(5, msec);
+      //printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
     }
     do{
       leftWheels.spin(fwd, 10, pct);
       rightWheels.spin(reverse, 10 , pct);
     }while(inertialAVG() > degrees);
   }
-  printf("current turn degree: %2f", inertialAVG());
-  wait(5, msec);
-  printf("avg: %2f\n", ((inertialRight.heading(deg)+inertialLeft.heading(deg)/2)));
   leftWheels.stop(hold);
   rightWheels.stop(hold);
 }
@@ -213,10 +214,10 @@ void visionSensorTest(string goalColor, double speed)
           leftWheels.stop(brakeType::brake);
           rightWheels.stop(brakeType::brake);
 
-          if(width < 210+OKerror)// && height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
+          if(width < 165+OKerror)// && height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
           {
             printf("[RED GOAL] Centered. Now attempting to get close enough to goal\n");
-            moveForward(-10, 10,5);
+            moveForward(-15, 15, 5);
           }
           else
           {
@@ -368,17 +369,17 @@ void visionSensorTest(string goalColor, double speed)
 }
 
 
-void printing(int aim)
-{
-    int x = 0; int y = 0;
+
+
+
+void printing(int aim){
+  int x = 0; int y = 0;
   int center = 0;
   int targetCenter = 0;
   bool runOnce = true;
 
-   while(runOnce)
-   {
-      switch(aim)
-      {
+   while(runOnce){
+      switch(aim){
         case 1:
           Vision1.takeSnapshot(RED_GOAL);
           center = 122;
@@ -393,8 +394,7 @@ void printing(int aim)
           break;
       }
 
-      if(Vision1.largestObject.exists)
-      {
+      if(Vision1.largestObject.exists){
           targetCenter = Vision1.largestObject.centerX;
           printf("center: %d\n", targetCenter);
           x = Vision1.largestObject.originX;
@@ -404,231 +404,4 @@ void printing(int aim)
       }
       wait( 10, msec);
    }
-}
-
-void visionSensorTest2(string goalColor, double speed){
-  int center = 119; //70
-  int OKerror = 20;
-  double xScale = 480.0/310;//Scaling the vision sensor range to the V5 Brain Screen
-  double yScale = 240.0/212;
-  int targetCenter = 0; int x = 0; int y=0; int height =0; int width = 0;
-  bool isTrue = true; 
-  string Hue = goalColor;
-
-  if(Hue == "Red"){
-    while(isTrue){
-      Brain.Screen.clearLine();
-      Brain.Screen.clearScreen();
-      Vision1.takeSnapshot(RED_GOAL);
-      if (isTrue)
-      {
-        targetCenter = Vision1.largestObject.centerX;
-        x = Vision1.largestObject.originX;
-        y = Vision1.largestObject.originY;
-        width = Vision1.largestObject.width;
-        printf("width: %d\n", width);
-        height = Vision1.largestObject.height;
-        printf("height: %d\n", height);
-        Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
-        Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
-        
-        if(targetCenter < (center - OKerror)) //If the object is to the left of center
-        {
-          //turn right
-          rightWheels.spin(reverse, speed, velocityUnits::pct);
-          leftWheels.spin(reverse, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-        } 
-        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
-        {
-          //turn left
-          rightWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::rev, 25, velocityUnits::pct);
-        } 
-        else //The object is not to the right of center and not to the left of center
-        {
-          //turn stop
-          leftWheels.stop(brakeType::brake);
-          rightWheels.stop(brakeType::brake);
-
-          if(width < 210+OKerror) //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
-          {
-            printf("Attempting to get close enough to goal\n");
-            moveForward(-5,5,5);
-          }
-          else
-          {
-            printf("Attempt success: goal is close enough\n");
-            leftWheels.stop(brakeType::brake);
-            rightWheels.stop(brakeType::brake);
-            isTrue = false;
-          }
-        }
-      }
-      else
-      {
-        Brain.Screen.print("Vision Sensor: Color Signature Not Found!");
-        turnClockwise(-5, 5, 3);
-      }
-    task::sleep(100);
-    }
-  }else if(Hue == "Blue"){
-    printf("in blue");
-      while(isTrue){
-      Brain.Screen.clearLine();
-      Brain.Screen.clearScreen();
-      Vision1.takeSnapshot(BLUE_GOAL);
-      if (Vision1.largestObject.exists)
-      {
-        targetCenter = Vision1.largestObject.centerX;
-        x = Vision1.largestObject.originX;
-        y = Vision1.largestObject.originY;
-        width = Vision1.largestObject.width;
-        printf("width: %d\n", width);
-        height = Vision1.largestObject.height;
-        printf("height: %d\n", height);
-        Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
-        Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
-        
-        if(targetCenter < (center - OKerror)) //If the object is to the left of center
-        {
-          //turn right
-          rightWheels.spin(directionType::rev, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::rev, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-        } 
-        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
-        {
-          //turn left
-          rightWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::rev, 25, velocityUnits::pct);
-        } 
-        else //The object is not to the right of center and not to the left of center
-        {
-          //turn stop
-          leftWheels.stop(brakeType::brake);
-          rightWheels.stop(brakeType::brake);
-
-          if(width < 165+OKerror) //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
-          {
-            printf("Attempting to get close enough to goal\n");
-            moveForward(-5, 5,5);
-          }
-          else
-          {
-            printf("Attempt success: goal is close enough\n");
-            leftWheels.stop(brakeType::brake);
-            rightWheels.stop(brakeType::brake);
-            isTrue = false;
-          }
-        }
-      }
-      else
-      {
-        printf("Vision Sensor: Color Signature Not Found!");
-        turnClockwise(-5, 5, 3);
-      }
-    task::sleep(100);
-    }
-  }
-  else if(Hue == "Ring"){
-    printf("in ring");
-      while(isTrue){
-      Brain.Screen.clearLine();
-      Brain.Screen.clearScreen();
-      Vision1.takeSnapshot(DONUT);
-      if (Vision1.largestObject.exists)
-      {
-        targetCenter = Vision1.largestObject.centerX;
-        x = Vision1.largestObject.originX;
-        y = Vision1.largestObject.originY;
-        width = Vision1.largestObject.width;
-        printf("width: %d\n", width);
-        height = Vision1.largestObject.height;
-        printf("height: %d\n", height);
-        Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
-        Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
-        
-        if(targetCenter < (center - OKerror)) //If the object is to the left of center
-        {
-          //turn right
-          rightWheels.spin(directionType::rev, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::rev, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::rev, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-        } 
-        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
-        {
-          //turn left
-          rightWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          leftWheels.spin(directionType::fwd, speed, velocityUnits::pct);
-          // rightWheels.spin(directionType::fwd, 25, velocityUnits::pct);
-          // leftWheels.spin(directionType::rev, 25, velocityUnits::pct);
-        } 
-        else //The object is not to the right of center and not to the left of center
-        {
-          //turn stop
-          leftWheels.stop(brakeType::brake);
-          rightWheels.stop(brakeType::brake);
-
-          if(width < 55+OKerror) //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
-          {
-            printf("Attempting to get close enough to ring\n");
-            moveForward(-5, 5,5);
-          }
-          else
-          {
-            printf("Attempt success: ring is close enough\n");
-            leftWheels.stop(brakeType::brake);
-            rightWheels.stop(brakeType::brake);
-            isTrue = false;
-          }
-        }
-      }
-      else
-      {
-        printf("Vision Sensor: Color Signature Not Found!\n");
-        turnClockwise(5, 5, 3);
-      }
-    task::sleep(100);
-    }
-  }
-}
-
-
-void visionHeightWidthCheck()
-{
-  double xScale = 480.0/310;//Scaling the vision sensor range to the V5 Brain Screen
-  double yScale = 240.0/212;
-  int x = 0; int y=0; int height =0; int width = 0;
-  while (true)
-  {
-    Brain.Screen.clearLine();
-    Brain.Screen.clearScreen();
-    Vision1.takeSnapshot(DONUT);
-    if (Vision1.largestObject.exists)
-    {
-      x = Vision1.largestObject.originX;
-      y = Vision1.largestObject.originY;
-      width = Vision1.largestObject.width;
-      height = Vision1.largestObject.height;
-      Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
-      Brain.Screen.setFillColor(color::purple);
-      Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
-      printf("width: %d\n", width);
-      printf("height: %d\n\n", height);
-
-    }
-    else
-    {
-      Brain.Screen.print("Vision Sensor: Color Signature Not Found!");
-    }
-    task::sleep(100);
-  }
 }

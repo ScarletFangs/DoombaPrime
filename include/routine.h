@@ -11,7 +11,7 @@ void rampFrontBlue();
 
 void rampSafe();
 
-void goalTest();
+void sensorTest();
 
 void skillsAuton();
 

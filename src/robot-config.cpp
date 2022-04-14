@@ -10,19 +10,11 @@ controller controller1(primary);
 controller controller2(partner);
 
 //Driving motors
-//new config after chains:
-motor left1(PORT20, ratio18_1, false); //new front
-motor left2(PORT12, ratio18_1, false); //new back
-//old configs not used:
-// motor left3(PORT1, ratio18_1, false); //bottom row
-// motor left4(PORT4, ratio18_1, true); //top row
+motor left1(PORT12, ratio18_1, false);
+motor left2(PORT20, ratio18_1, false); 
 
-//new config after chains:
-motor right1(PORT11, ratio18_1, true); //new front
-motor right2(PORT10, ratio18_1, true); //new back
-//old configs not used:
-// motor right3(PORT7, ratio18_1, true); //front
-// motor right4(PORT19, ratio18_1, false);
+motor right1(PORT10, ratio18_1, true);
+motor right2(PORT11, ratio18_1, true); 
 
 //Motor Groups
 motor_group leftWheels(left1, left2);
@@ -48,7 +40,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
 }
 
 //Inertial Sensor
-inertial inertialLeft = inertial(PORT4);
+inertial inertialLeft = inertial(PORT9);
 inertial inertialRight = inertial(PORT19);
 
 

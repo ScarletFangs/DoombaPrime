@@ -12,13 +12,9 @@ extern controller controller2;
 //Driving motor
 extern motor left1;
 extern motor left2;
-extern motor left3;
-extern motor left4;
 
 extern motor right1;
 extern motor right2;
-extern motor right3;
-extern motor right4;
 
 //Driving Motor Groups
 extern smartdrive Drivetrain;
@@ -51,6 +47,9 @@ extern motor Belt;
 extern motor bLift1;
 extern motor bLift2;
 extern motor_group bLift;
+
+//potentiometer
+extern pot angleMeasure;
 
 void vexcodeInit(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);

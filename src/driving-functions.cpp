@@ -113,7 +113,7 @@ void beltControl(){
   }
 
   if(belttoggle){
-    Belt.spin(fwd, 100, pct);  //95
+    Belt.spin(fwd, 95, pct);  //95
   }else{
     Belt.stop(coast);
   }

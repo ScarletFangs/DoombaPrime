@@ -7,6 +7,7 @@ void setMotorTimeout(int timeSeconds);
 
 //Drive distance with specific distance
 void moveForward(float distanceCM, int speedPCT, int timeSec);
+void moveForwardCoast(float distanceCM, int speedPCT, int timeSec);
 //Input sides individually (turning right)
 void flexMvmtR(float distanceLeft, float distanceRight, int speedPCTL, int speedPCTR, int timeSec);
 //Input sides individually (turning left)
@@ -33,10 +34,7 @@ float inertialAVG();
 void inertialTurn(vex::turnType dir, double speed, double degrees, double timeout);
 
 //Vision sensor
-void visionSensorTest(std::string goalColor, double speed);
+void visionSensorTest(std::string goalColor, double);
 
 void printing(int);
-
-void visionHeightWidthCheck();
-
 #endif

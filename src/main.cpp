@@ -40,14 +40,11 @@ void userControl(){
 
 
 void Autonomous(){
-  //VisionTest2();
-  //visionSensorTest("Red");
-  //rampFront();
-  rampFrontBlue();
-  //rampFrontRed();
-  //goalFrontBlue();
-  
-  //visionHeightWidthCheck();
+  //goalTest();
+  //printing(2);
+  //rampFrontBlue();
+  rampFrontRed();
+  // sensorTest();
   //rampSafe();
 }
 
@@ -60,17 +57,10 @@ void Autonomous(){
 // void Autonomous(){
 //   if(getValues(AUTON_COLOR)== BLUE){
 //     if(getValues(AUTON_TYPE) == GOALSIDE){
-//       //Nate 04/12/2022 update
-//       goalFrontBlue();
-
-//       //rampFrontBlue();
+//       rampFrontBlue();
 //       printf("goal side auton");
 //     }else if(getValues(AUTON_TYPE) == RAMPSIDE){
-//       //Nate 04/12/2022 update
-//       rampFrontBlue();
-
-//       //Old Code. Nate comment this out on 04/12/2022
-//       //rampSafe();
+//       rampSafe();
 //       printf("ramp side auton");
 //     }else if(getValues(AUTON_TYPE) == SKILLS){
 //       //skillsAuton();
