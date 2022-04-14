@@ -42,8 +42,8 @@ void userControl(){
 void Autonomous(){
   //goalTest();
   //printing(2);
-  //rampFrontBlue();
-  rampFrontRed();
+  rampFrontBlue();
+  //rampFrontRed();
   // sensorTest();
   //rampSafe();
 }

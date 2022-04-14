@@ -20,6 +20,8 @@ extern motor right2;
 extern smartdrive Drivetrain;
 extern motor_group leftWheels;
 extern motor_group rightWheels;
+extern motor_group frontWheels;
+extern motor_group backWheels;
 
 //4 Bar motor
 extern motor liftL1;

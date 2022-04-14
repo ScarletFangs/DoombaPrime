@@ -18,8 +18,8 @@ void setMotorTimeout(int timeSeconds){
 void moveForward(float distanceCM, int speedPCT, int timeSec){
   setMotorTimeout(timeSec);
 
-  leftWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
-  rightWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
+  frontWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, false);
+  backWheels.rotateFor(directionType::fwd, double(distanceCM/25.9), rotationUnits::rev, double(speedPCT), velocityUnits::pct, true);
 
   setMotorTimeout(0);
 }
@@ -217,7 +217,7 @@ void visionSensorTest(string goalColor, double speed)
           if(width < 165+OKerror)// && height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
           {
             printf("[RED GOAL] Centered. Now attempting to get close enough to goal\n");
-            moveForward(-15, 15, 5);
+            moveForward(-5, 15, 5);
           }
           else
           {
@@ -280,7 +280,7 @@ void visionSensorTest(string goalColor, double speed)
             if(width < 165+OKerror) //&& height < 145+OKerror //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
             {
               printf("[BLUE GOAL] Centered. Now attempting to get close enough to goal\n");
-              moveForward(-15, 15, 5);
+              moveForward(-5, 15, 5);
             }
             else
             {
@@ -347,7 +347,7 @@ void visionSensorTest(string goalColor, double speed)
             if(width < 25+OKerror) //(width < 314+OKError) || (height < 145+OKError || height > 145-OKError)
             {
               printf("[DONUT] Centered. Now attempting to get close enough to ring\n");
-              moveForward(-10, 10,5);
+              moveForward(-10, 20,5);
             }
             else
             {

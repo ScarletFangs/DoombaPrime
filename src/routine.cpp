@@ -86,7 +86,7 @@ void rampFrontRed(){
   //newly added. allign using vision sensor
   moveForward(-40, 30, 10000);    //-40, 30, 10000
   liftAuton(2, 10, 1);
-  visionSensorTest("Purple", 10);
+  visionSensorTest("Purple", 15);
   wait(1, sec);
 
   // //get personal
@@ -98,8 +98,12 @@ void rampFrontRed(){
   moveForward(-7, 10, 1);
   bLiftAuton2(-30.2, 50, 1);  //up
   moveForward(20, 10, 1);
+  inertialTurn(right, 15, 25, 1);
   do{
     Belt.spin(fwd, 90, pct);
+    moveForward(50, 15, 1);
+    wait(1, sec);
+    moveForward(-40, 15, 1);
   }while((internalTimer > 30000) && (internalTimer < 45000));
 
 }
@@ -123,13 +127,18 @@ void rampFrontBlue(){
   turnClockwise(-15, 15, 5); //perfect is 15
   moveForward(10, 10, 1);
   bLiftAuton2(28, 50, 1); //down
-  visionSensorTest("Blue", 10);
-  moveForward(-7, 10, 1);
-  bLiftAuton2(-30.2, 50, 1);  //up
+  visionSensorTest("Blue", 5);
+  moveForward(-15, 10, 1);
+  bLiftAuton2(-28, 50, 1);  //up   -30.2
   moveForward(20, 10, 1);
-
+  inertialTurn(right, 15, 65, 1);
+  Belt.spin(fwd, 90, pct);
+  moveForward(30, 20, 1);   //good speed 15
   do{
-    Belt.spin(fwd, 90, pct);
+    wait(1, sec);
+    moveForward(-40, 20, 1);
+    wait(1, sec);
+    moveForward(40, 20, 1);
   }while((internalTimer > 30000) && (internalTimer < 45000));
 }
 
