@@ -79,40 +79,42 @@ void rampFrontRed(){
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(76, 100, 5);
+  moveForward(78, 100, 5);
   latchDown.set(0);
   //moveForward(-110, 100, 10000); //initially we just move backward hard code
 
   //newly added. allign using vision sensor
   moveForward(-40, 30, 10000);    //-40, 30, 10000
   liftAuton(2, 10, 1);
-  visionSensorTest("Purple", 15);
+  visionSensorTest("Purple", 10);
   wait(1, sec);
 
   // //get personal
-  inertialTurn(left, 15, 90, 5);
-  //turnClockwise(-15, 15, 5); //perfect is 15
+  //inertialTurn(left, 15, 90, 5);
+  turnClockwise(-15, 15, 5); //perfect is 15
   moveForward(10, 10, 1);
   bLiftAuton2(28, 50, 1); //down
-  visionSensorTest("Red", 10);
-  moveForward(-7, 10, 1);
+  visionSensorTest("Red", 5);
+  moveForward(-15, 10, 1);
   bLiftAuton2(-30.2, 50, 1);  //up
   moveForward(20, 10, 1);
-  inertialTurn(right, 15, 25, 1);
+  inertialTurn(right, 15, 65, 1);
+  Belt.spin(fwd, 90, pct);
+  moveForward(30, 20, 1);   //good speed 15
   do{
-    Belt.spin(fwd, 90, pct);
-    moveForward(50, 15, 1);
-    wait(1, sec);
-    moveForward(-40, 15, 1);
+    wait(500, msec);
+    moveForward(-40, 20, 1);
+    wait(500, sec);
+    moveForward(40, 20, 1);
   }while((internalTimer > 30000) && (internalTimer < 45000));
-
 }
+
 void rampFrontBlue(){
   internalTimer.reset();
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(76, 100, 5);
+  moveForward(78, 100, 5);
   latchDown.set(0);
   //moveForward(-110, 100, 10000); //initially we just move backward hard code
 
@@ -135,9 +137,9 @@ void rampFrontBlue(){
   Belt.spin(fwd, 90, pct);
   moveForward(30, 20, 1);   //good speed 15
   do{
-    wait(1, sec);
+    wait(500, msec);
     moveForward(-40, 20, 1);
-    wait(1, sec);
+    wait(500, msec);
     moveForward(40, 20, 1);
   }while((internalTimer > 30000) && (internalTimer < 45000));
 }
