@@ -47,9 +47,9 @@ bool speedtoggle = false;
 bool speedstopper = false;
 void changespeed(){
   if(speedtoggle){
-    speed = 0.6;
+    speed = 0.9;
   }else{
-    speed = 0.85;
+    speed = 1;
   }
 
   if(controller1.ButtonUp.pressing()){
