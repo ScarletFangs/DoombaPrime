@@ -107,6 +107,10 @@ void rampFrontRed(){
     wait(500, sec);
     moveForward(40, 20, 1);
   }while((internalTimer > 30000) && (internalTimer < 60000)); //(internalTimer < 45000)
+    moveForward(-40, 20, 1);
+    wait(500, sec);
+    moveForward(40, 20, 1);
+  }while((internalTimer > 30000) && (internalTimer < 45000));
 }
 void rampFrontBlue(){
   internalTimer.reset();
@@ -141,6 +145,10 @@ void rampFrontBlue(){
     wait(500, msec);
     moveForward(50, 20, 1);
   }while((internalTimer > 30000) && (internalTimer < 45000)); //(internalTimer < 45000)
+    moveForward(-40, 20, 1);
+    wait(500, msec);
+    moveForward(40, 20, 1);
+  }while((internalTimer > 30000) && (internalTimer < 45000));
 }
 
 /* -----------------------------------*/
