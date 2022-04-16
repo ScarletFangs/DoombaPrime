@@ -20,9 +20,9 @@ void turnClockwise(float degree, int speedPCT, int timeSec);
 void liftAuton(float, int, int);
 
 //Move back lift
-void bLiftAuton(float, int);
-
+void bLiftAuton(double, int);
 void bLiftAuton2(float degree, int speedPCT, int timeSec);
+void bLiftPOT(std::string, double);
 
 //Belt
 void beltControl(double, double);

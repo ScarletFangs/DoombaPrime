@@ -47,9 +47,9 @@ bool speedtoggle = false;
 bool speedstopper = false;
 void changespeed(){
   if(speedtoggle){
-    speed = 0.6;
+    speed = 0.3;
   }else{
-    speed = 0.85;
+    speed = 1;
   }
 
   if(controller1.ButtonUp.pressing()){
@@ -113,7 +113,7 @@ void beltControl(){
   }
 
   if(belttoggle){
-    Belt.spin(fwd, 95, pct);  //95
+    Belt.spin(fwd, 90, pct);  //95
   }else{
     Belt.stop(coast);
   }
@@ -123,42 +123,6 @@ void beltControl(){
 }
 
 //Back lift
-bool lifttoggle = false;
-bool liftstopper = false;
-bool initialdown = false;
-float bliftdegree = 0.5;
-//code to drop down a little if gets blocked like auton
-bool justdownonce = false;
-void bLiftControl(){
-  if(controller1.ButtonB.pressing()){
-    printf("FIRST\n");
-    initialdown =  true;
-  }
-  if(initialdown){
-  if(lifttoggle){
-    printf("SECOND\n");
-    bLift.spinToPosition(-0.25, rev);
-    // bLift.spinTo(0.5, rev, false);
-    bLift.stop(hold);
-  }else{
-    printf("THIRD\n");
-    bLift.spinToPosition(0.02, rev);  
-    bLift.stop(hold);
-  }
-
-  if(controller1.ButtonX.pressing()){
-    if(!stopper){
-      lifttoggle = !lifttoggle;
-      liftstopper = true;
-    }
-  }else{
-    liftstopper = false;
-  }
-  wait(20,msec);
-  }
-  // printf("end of function\n");
-} 
-
 void bLiftManual(){
   if(controller1.ButtonB.pressing()||controller2.ButtonB.pressing()){
     // bLift.spinToPosition(1.25, rev);
@@ -171,3 +135,38 @@ void bLiftManual(){
   }
 
 }
+
+bool bLiftdownt = false;
+bool bLiftdowns = false;
+//if potentiometer messed up, make down at 131-134 hovering
+void potbLift(){
+  if(controller1.ButtonL1.pressing()){
+    if(!bLiftdowns){
+      bLiftdownt = !bLiftdownt;
+      bLiftdowns = true;
+    }
+  }else{
+    bLiftdowns = false;
+  }
+
+  if(bLiftdownt){
+    //up
+    if((angleLiftL.angle(deg) > 84)&&(angleLiftR.angle(deg) > 84)){
+      printf("going up goal position \n");
+      bLift.spin(reverse, 50, pct);
+    }else{
+      printf("holding in up     right:%4.3f  | left:%4.3f\n", angleLiftR.angle(deg), angleLiftL.angle(deg));
+      bLift.stop(hold);
+    }
+  }else{
+    //down
+    if((angleLiftL.angle(deg) < 134 )&&(angleLiftR.angle(deg) < 131)){
+      printf("going down to get goal\n");
+      bLift.spin(fwd, 50, pct);
+    }else{
+      printf("holding in down   right:%4.3f  | left:%4.3f\n", angleLiftR.angle(deg), angleLiftL.angle(deg));
+      bLift.stop(hold);
+    }
+  }
+}
+

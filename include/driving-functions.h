@@ -16,7 +16,9 @@ void liftToggle();
 void beltControl();
 
 //Back lift
-void bLiftControl();
 void bLiftManual();
+void potAvg();
+void potbLift();
+
 
 #endif

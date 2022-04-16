@@ -51,7 +51,8 @@ extern motor bLift2;
 extern motor_group bLift;
 
 //potentiometer
-extern pot angleMeasure;
+extern pot angleLiftL;
+extern pot angleLiftR;
 
 void vexcodeInit(void);
 long map(long x, long in_min, long in_max, long out_min, long out_max);

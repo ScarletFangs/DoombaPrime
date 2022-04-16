@@ -97,6 +97,27 @@ void bLiftAuton2(float degree, int speedPCT, int timeSec)
   setMotorTimeout(0);
 }
 
+void bLiftPOT(string dir, double timeout){
+  setMotorTimeout(timeout);
+
+  if(dir == "up"){
+    while((angleLiftL.angle(deg) > 83)&&(angleLiftR.angle(deg) > 83)){
+      printf("[up] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
+      bLift.spin(reverse, 50, pct);   
+    }
+    bLift.stop(hold);
+  }else if(dir == "down"){
+    while((angleLiftL.angle(deg) < 138 )&&(angleLiftR.angle(deg) < 133)){
+      printf("[down] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
+      bLift.spin(fwd, 50, pct);   
+    }
+    bLift.stop(hold);
+  }
+
+
+  setMotorTimeout(0);
+}
+
 //Belt
 void beltControl(double time = 45, double speedPCT = 95)
 {

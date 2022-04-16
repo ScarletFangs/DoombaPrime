@@ -54,6 +54,10 @@ motor bLift1(PORT15, ratio36_1, true);
 motor bLift2(PORT16, ratio36_1, false);
 motor_group bLift(bLift1, bLift2);
 
+//potentiometer
+pot angleLiftR = pot(Brain.ThreeWirePort.H);
+pot angleLiftL = pot(Brain.ThreeWirePort.G);
+
 void vexcodeInit(void) {
   Brain.setTimer(0, msec);
   Brain.Screen.print("Device initialization...");

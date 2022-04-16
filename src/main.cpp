@@ -26,15 +26,18 @@
 using namespace vex;
 competition Competition;
 
-// // Without Menu
+// Without Menu
 void userControl(){
   while(1){
     tankDrive();
     liftControl();
     liftToggle();
-    bLiftManual();
+    //bLiftManual();
     beltControl();
     changespeed();
+    potbLift();
+    // printf("right: %4.3f   |", angleLiftR.angle(deg));
+    // printf("left: %4.3f\n", angleLiftL.angle(deg));
   }
 }
 
@@ -42,13 +45,23 @@ void userControl(){
 void Autonomous(){
   //goalTest();
   //printing(2);
-  rampFrontBlue();
+  //rampFrontBlue();
   //rampFrontRed();
   // sensorTest();
-  //rampSafe();
+  // //rampSafe();
+  bLiftPOT("down", 1);
+  wait(2, sec);
+  printf("1\n");
+  moveForward(-25, 15, 1);
+  printf("2\n");
+  wait(2, sec);
+  bLiftPOT("up", 2);
+  wait(2,sec);
+  printf("3\n");
+  Belt.spin(fwd, 90, pct);
 }
 
-//---Menu---
+// //---Menu---
 // int tempStatus = 0;
 // void menuSetup(){
 //   menuCONFIG();
@@ -57,10 +70,10 @@ void Autonomous(){
 // void Autonomous(){
 //   if(getValues(AUTON_COLOR)== BLUE){
 //     if(getValues(AUTON_TYPE) == GOALSIDE){
-//       rampFrontBlue();
+//       goalFrontBlue();
 //       printf("goal side auton");
 //     }else if(getValues(AUTON_TYPE) == RAMPSIDE){
-//       rampSafe();
+//       rampFrontBlue();
 //       printf("ramp side auton");
 //     }else if(getValues(AUTON_TYPE) == SKILLS){
 //       //skillsAuton();
@@ -70,10 +83,10 @@ void Autonomous(){
 //   }
 //   else if(getValues(AUTON_COLOR) == RED){
 //     if(getValues(AUTON_TYPE) == GOALSIDE){
-//       rampFrontRed();
+//       goalFrontRed();
 //       printf("REDgoal side auton");
 //     }else if(getValues(AUTON_TYPE) == RAMPSIDE){
-//       rampSafe();
+//       rampFrontRed();
 //       printf("ramp side auton");
 //     }else if(getValues(AUTON_TYPE) == SKILLS){
 //       //skillsAuton();
@@ -90,7 +103,7 @@ void Autonomous(){
 //         liftToggle();
 //         liftControl();
 //         beltControl();
-//         bLiftControl();
+//         // bLiftControl();
 //       }else if(getValues(AUTON_DRIVE) == TANK){
 //         tankDrive();
 //         liftControl();
