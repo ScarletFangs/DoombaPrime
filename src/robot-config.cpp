@@ -12,13 +12,15 @@ controller controller2(partner);
 //Driving motors
 motor left1(PORT12, ratio18_1, false);
 motor left2(PORT20, ratio18_1, false); 
+motor left3(PORT1, ratio18_1, false); //front motor left
 
 motor right1(PORT10, ratio18_1, true);
 motor right2(PORT11, ratio18_1, true); 
+motor right3(PORT6, ratio18_1, true); //front motor right
 
 //Motor Groups
-motor_group leftWheels(left1, left2);
-motor_group rightWheels(right1, right2);
+motor_group leftWheels(left1, left2, left3);
+motor_group rightWheels(right1, right2, right3);
 motor_group frontWheels(left2, right2);
 motor_group backWheels(left1, right1);
 

@@ -45,20 +45,38 @@ void userControl(){
 void Autonomous(){
   //goalTest();
   //printing(2);
+  donutRedRamp();
   //rampFrontBlue();
   //rampFrontRed();
   // sensorTest();
   // //rampSafe();
-  bLiftPOT("down", 1);
-  wait(2, sec);
-  printf("1\n");
-  moveForward(-25, 15, 1);
-  printf("2\n");
-  wait(2, sec);
-  bLiftPOT("up", 2);
-  wait(2,sec);
-  printf("3\n");
-  Belt.spin(fwd, 90, pct);
+
+
+  // bool yes = true;
+  // bLiftPOT("down", 1);
+  // wait(2, sec);
+  // printf("1\n");
+  // moveForward(-25, 15, 1);
+  // printf("2\n");
+  // wait(2, sec);
+  // bLiftPOT("up", 2);
+  // wait(2,sec);
+  // printf("3\n");
+
+  // //Belt.spin(fwd, 90, pct); //does not allow simultaneous task
+
+  // beltControl(45,95); //Nate is gonna attempt to use this
+
+  // while(yes)
+  // {
+  //   printf("im in the whileloop"); //does not print. never entered while loop
+  //   moveForward(-30, 20, 1);
+  //   wait(500, sec);
+  //   moveForward(30, 20, 1); //50, 20, 1
+  // }
+
+
+  
 }
 
 // //---Menu---

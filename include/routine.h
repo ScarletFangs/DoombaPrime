@@ -3,6 +3,8 @@
 #define ROUTINE
 
 //Routines-----------------
+void donutRedRamp();
+
 void goalFrontBlue();
 void goalFrontRed();
 

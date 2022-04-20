@@ -151,7 +151,7 @@ void potbLift(){
 
   if(bLiftdownt){
     //up
-    if((angleLiftL.angle(deg) > 84)&&(angleLiftR.angle(deg) > 84)){
+    if((angleLiftL.angle(deg) > 75.5)&&(angleLiftR.angle(deg) > 75.5)){
       printf("going up goal position \n");
       bLift.spin(reverse, 50, pct);
     }else{
@@ -160,9 +160,9 @@ void potbLift(){
     }
   }else{
     //down
-    if((angleLiftL.angle(deg) < 134 )&&(angleLiftR.angle(deg) < 131)){
+    if((angleLiftL.angle(deg) < 138 )&&(angleLiftR.angle(deg) < 133)){
       printf("going down to get goal\n");
-      bLift.spin(fwd, 50, pct);
+      bLift.spin(fwd, 65, pct);
     }else{
       printf("holding in down   right:%4.3f  | left:%4.3f\n", angleLiftR.angle(deg), angleLiftL.angle(deg));
       bLift.stop(hold);

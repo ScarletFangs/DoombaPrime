@@ -10,9 +10,136 @@
 using namespace vex;
 timer internalTimer;
 
-/* -----------------------------------*/
-//GOALSIDE
-/* -----------------------------------*/
+/* -----------------------------------
+  LOCATION: RED GOAL-SIDE
+
+  AUTON DESCRIPTION:
+  -Grab Red Alliance Goal from Triangle Line
+  -Collect Ring
+  -Grab Yellow
+ -----------------------------------*/
+void donutRedGoal()
+{
+  internalTimer.reset();
+}
+
+
+
+/* -----------------------------------
+  LOCATION: RED GOAL-SIDE
+
+  AUTON DESCRIPTION:
+  -Grab Red Alliance Goal from Triangle Line
+  -Collect Ring
+  -Grab Yellow
+ -----------------------------------*/
+void donutBlueGoal()
+{
+  internalTimer.reset();
+}
+
+
+/* -----------------------------------
+  LOCATION: RED RAMP-SIDE
+
+  AUTON DESCRIPTION:
+  -Grab Red Alliance Goal from Ramp
+  -Collect Ring
+  -Grab Yellow
+ -----------------------------------*/
+void donutRedRamp()
+{
+  internalTimer.reset();
+
+//positioning
+  moveForward(15, 15, 1);
+  turnClockwise(-10, 15, 5);
+
+//Grabbing Goal
+  bLiftPOT("down", 1);
+  visionSensorTest("Red", 5);
+  moveForward(-20, 20, 1);
+  bLiftPOT("up", 2);
+
+//Collecting Ring
+  moveForward(20, 10, 1);
+  inertialTurn(right, 15, 30, 1);
+  Belt.spin(fwd, 90, pct);
+  moveForward(25, 20, 1);  
+  do
+  {
+    wait(500, msec);
+    moveForward(-32, 20, 1);
+    wait(500, msec);
+    moveForward(32, 20, 1); 
+  } while(internalTimer < 30000);
+
+//Grab Yellow
+  inertialTurn(right, 15, 15, 1);
+  latchDown.set(1); //open
+  liftAuton(0, 10, 5);
+  moveForward(60, 30, 5); //78, 98, 5
+  latchDown.set(0); //close latchdown
+  liftAuton(2, 10, 1);
+  moveForward(-70, 60, 10000);
+}
+
+
+/* -----------------------------------
+  LOCATION: BLUE RAMP-SIDE
+
+  AUTON DESCRIPTION:
+  -Grab Blue Alliance Goal from Ramp
+  -Collect Ring
+  -Grab Yellow
+ -----------------------------------*/
+void donutBlueRamp()
+{
+  internalTimer.reset();
+
+//positioning
+  moveForward(15, 15, 1);
+  turnClockwise(-10, 15, 5);
+
+//Grabbing Goal
+  bLiftPOT("down", 1);
+  visionSensorTest("Blue", 5);
+  moveForward(-20, 20, 1);
+  bLiftPOT("up", 2);
+
+//Collecting Ring
+  moveForward(20, 10, 1);
+  inertialTurn(right, 15, 30, 1);
+  Belt.spin(fwd, 90, pct);
+  moveForward(25, 20, 1);  
+  do
+  {
+    wait(500, msec);
+    moveForward(-32, 20, 1);
+    wait(500, msec);
+    moveForward(32, 20, 1); 
+  } while(internalTimer < 30000);
+
+//Grab Yellow
+  inertialTurn(right, 15, 15, 1);
+  latchDown.set(1); //open
+  liftAuton(0, 10, 5);
+  moveForward(60, 30, 5); //78, 98, 5
+  latchDown.set(0); //close latchdown
+  liftAuton(2, 10, 1);
+  moveForward(-70, 60, 10000);
+}
+
+
+
+/* -----------------------------------
+  LOCATION: BLUE GOAL-SIDE
+
+  AUTON DESCRIPTION:
+  -Go for Yellow first
+  -Grab Blue Alliance Goal from Triangle Line
+  -Collect Ring
+ -----------------------------------*/
 void goalFrontBlue()
 {
   internalTimer.reset();
@@ -26,15 +153,22 @@ void goalFrontBlue()
   visionSensorTest("Purple", 5);
   wait(1, sec);
 
-  // //get personal
-  //inertialTurn(left, 20, 90, 5);   //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
-  turnClockwise(-15, 15, 5); //perfect is 15
+  //get personal
+  //inertialTurn(left, 20, 90, 5); //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
+  turnClockwise(-15, 15, 5);
   moveForward(15, 10, 1);
-  ////bLiftAuton2(28, 50, 1); //down
+
+  //NEW BACKLIFT DOWN BELOW
+  bLiftPOT("down", 1);
+
   visionSensorTest("Blue", 5);
   moveForward(-20, 20, 1);
-  ////bLiftAuton2(-30, 50, 1);  //up
-  moveForward(20, 10, 1); //uncomment this
+
+  //NEW BACKLIFT UP BELOW
+  bLiftPOT("up", 2);
+
+
+  moveForward(20, 10, 1);
   do{
     Belt.spin(fwd, 95, pct);
     // moveForward(-10, 15, 1);
@@ -42,6 +176,16 @@ void goalFrontBlue()
   }while(internalTimer > 30000);
 }
 
+
+/* -----------------------------------
+  LOCATION: RED GOAL-SIDE
+
+  AUTON DESCRIPTION:
+  -Go for Yellow first
+  -Grab Red Alliance Goal from Triangle Line
+  -Collect Ring
+
+ -----------------------------------*/
 void goalFrontRed()
 {
   internalTimer.reset();
@@ -55,15 +199,21 @@ void goalFrontRed()
   visionSensorTest("Purple", 5);
   wait(1, sec);
 
-  // //get personal
-  //inertialTurn(left, 20, 90, 5);   //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
-  turnClockwise(-15, 15, 5); //perfect is 15
+  //get personal
+  //inertialTurn(left, 20, 90, 5); //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
+  turnClockwise(-15, 15, 5);
   moveForward(15, 10, 1);
-  /////bLiftAuton2(28, 50, 1); //down
+
+  //NEW BACKLIFT DOWN
+  bLiftPOT("down", 1);
+
   visionSensorTest("Red", 5);
   moveForward(-20, 20, 1);
-  /////bLiftAuton2(-30, 50, 1);  //up
-  moveForward(20, 10, 1); //uncomment this
+
+  //NEW BACKLIFT UP
+  bLiftPOT("up", 2); 
+
+  moveForward(20, 10, 1); 
   do{
     Belt.spin(fwd, 95, pct);
     // moveForward(-10, 15, 1);
@@ -71,85 +221,124 @@ void goalFrontRed()
   }while(internalTimer > 30000);
 }
 
-/* -----------------------------------*/
-//RAMPSIDE
-/* -----------------------------------*/
-void rampFrontRed(){
+
+/* -----------------------------------
+  LOCATION: RED RAMP-SIDE
+
+  AUTON DESCRIPTION:
+  -Go for Yellow first
+  -Grab Red Alliance Goal from Ramp
+  -Collect Ring
+ -----------------------------------*/
+void rampFrontRed()
+{
   internalTimer.reset();
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
   moveForward(75, 85, 5); //78, 98, 5
   latchDown.set(0);
-  //moveForward(-110, 100, 10000); //initially we just move backward hard code
 
-  //newly added. allign using vision sensor
-  moveForward(-40, 30, 10000);    //-40, 30, 10000
-  liftAuton(2, 10, 1);
-  visionSensorTest("Purple", 10);
-  wait(1, sec);
-
-  // //get personal
-  //inertialTurn(left, 15, 90, 5);
-  turnClockwise(-15, 15, 5); //perfect is 15
-  moveForward(10, 10, 1);
-  bLiftAuton2(33, 50, 1); //down  
-  visionSensorTest("Red", 5);
-  moveForward(-15, 10, 1);
-  bLiftAuton2(-31, 50, 1);  //up //-32.5
-  moveForward(20, 10, 1);
-  inertialTurn(right, 15, 65, 1);
-  Belt.spin(fwd, 90, pct);
-  moveForward(30, 20, 1);   //good speed 15
-  do{
-    wait(500, msec);
-    moveForward(-50, 20, 1);
-    wait(500, sec);
-    moveForward(40, 20, 1);
-  }while((internalTimer > 30000) && (internalTimer < 60000)); //(internalTimer < 45000)
-    moveForward(-40, 20, 1);
-    wait(500, sec);
-    moveForward(40, 20, 1);
-  }while((internalTimer > 30000) && (internalTimer < 45000));
-}
-void rampFrontBlue(){
-  internalTimer.reset();
-  //get yellow goal
-  latchDown.set(1);
-  liftAuton(0, 10, 5);
-  moveForward(75, 85, 5); //78, 98, 5
-  latchDown.set(0);
-  //moveForward(-110, 100, 10000); //initially we just move backward hard code
-
-  //newly added. allign using vision sensor
   moveForward(-40, 30, 10000);
   liftAuton(2, 10, 1);
   visionSensorTest("Purple", 10);
   wait(1, sec);
 
-  // //get personal
-  //inertialTurn(left, 30, 80, 5); //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
-  turnClockwise(-15, 15, 1); //perfect is 15
+  //get personal
+  //inertialTurn(left, 15, 90, 5); NOT WORKING FOR NOW
+  turnClockwise(-15, 15, 5);
   moveForward(10, 10, 1);
-  bLiftAuton2(33, 50, 1); //down
+
+  //OLD BACKLIFT: bLiftAuton2(33, 50, 1); //down 
+  //NEW BACKLIFT DOWN BELOW
+  bLiftPOT("down", 1);
+
+
+  visionSensorTest("Red", 5);
+  moveForward(-15, 10, 1);
+
+
+  //OLD BACKLIFT: bLiftAuton2(-31, 50, 1);  //up //-32.5
+  //NEW BACKLIFT UP BELOW
+  bLiftPOT("up", 2);
+
+  moveForward(20, 10, 1);
+  inertialTurn(right, 15, 30, 1);
+  Belt.spin(fwd, 90, pct);
+  moveForward(25, 20, 1);  
+  do
+  {
+    wait(500, msec);
+    moveForward(-35, 20, 1);
+    wait(500, msec);
+    moveForward(35, 20, 1); 
+  } while((internalTimer > 30000) && (internalTimer < 45000));
+}  
+
+
+/* -----------------------------------
+  LOCATION: Blue RAMP-SIDE
+
+  AUTON DESCRIPTION:
+  -Go for Yellow first
+  -Grab Blue Alliance Goal from Ramp
+  -Collect Ring
+ -----------------------------------*/
+void rampFrontBlue()
+{
+  internalTimer.reset();
+  //get yellow goal
+  latchDown.set(1);
+  liftAuton(0, 10, 5);
+  moveForward(75, 85, 5); //78, 98, 5
+  latchDown.set(0);
+
+  moveForward(-40, 30, 10000);
+  liftAuton(2, 10, 1);
+  visionSensorTest("Purple", 10);
+  wait(1, sec);
+
+
+
+  //get personal
+  //inertialTurn(left, 30, 80, 5); //NOT WORKING FOR NOW. IT CONTNINUES TO SPIN NON STOP
+  turnClockwise(-15, 15, 1);
+  moveForward(10, 10, 1);
+
+  //OLD BACKLIFT: bLiftAuton2(33, 50, 1); //down
+  //NEW BACKLIFT DOWN BELOW
+  bLiftPOT("down", 1);
+  wait(2, sec);
+
+
   visionSensorTest("Blue", 5);
   moveForward(-15, 10, 1);
-  bLiftAuton2(-33, 50, 1);  //up //-32.5  -30.2
+
+
+  //OLD BACKLIFT: bLiftAuton2(-33, 50, 1);  //up //-32.5  -30.2
+  //NEW BACKLIFT UP BELOW
+  bLiftPOT("up", 2);
+  wait(2,sec);  
+
+
   moveForward(20, 10, 1);
-  inertialTurn(right, 15, 65, 1);
+  inertialTurn(right, 15, 30, 1);
   Belt.spin(fwd, 90, pct);
-  moveForward(30, 20, 1);   //good speed 15
-  do{
+  moveForward(25, 20, 1);
+  do
+  {
     wait(500, msec);
-    moveForward(-52, 20, 1);
+    moveForward(-35, 20, 1); 
     wait(500, msec);
-    moveForward(50, 20, 1);
-  }while((internalTimer > 30000) && (internalTimer < 45000)); //(internalTimer < 45000)
-    moveForward(-40, 20, 1);
-    wait(500, msec);
-    moveForward(40, 20, 1);
-  }while((internalTimer > 30000) && (internalTimer < 45000));
-}
+    moveForward(35, 20, 1);
+  }
+  while((internalTimer > 30000) && (internalTimer < 45000));
+  }
+
+
+
+
+
 
 /* -----------------------------------*/
 //OTHERS

@@ -12,9 +12,11 @@ extern controller controller2;
 //Driving motor
 extern motor left1;
 extern motor left2;
+extern motor left3;
 
 extern motor right1;
 extern motor right2;
+extern motor right3;
 
 //Driving Motor Groups
 extern smartdrive Drivetrain;
