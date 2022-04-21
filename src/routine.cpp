@@ -20,7 +20,47 @@ timer internalTimer;
  -----------------------------------*/
 void donutRedGoal()
 {
-  internalTimer.reset();
+internalTimer.reset();
+
+//Grabbing Goal
+  bLiftPOT("down", 1);
+  visionSensorTest("Red", 5);
+  moveForward(-20, 20, 1);
+  bLiftPOT("up", 2);
+
+  inertialTurn(left, 15, 105, 1);
+  Belt.spin(fwd, 100, pct);
+  moveForward(6, 20, 1);  
+  do
+  {
+    wait(500, msec);
+    moveForward(-31, 20, 1);
+    wait(500, msec);
+    moveForward(31, 20, 1); 
+  } while(internalTimer < 27000); //30000
+  Belt.stop(coast);
+
+//Grab Yellow
+  inertialTurn(left, 15, 7, 1);
+  wait(10, msec);
+  moveForward(7, 7, 1);  
+  wait(5, msec);
+  inertialTurn(left, 10, 20, 1);
+  wait(5, msec);
+  latchDown.set(1); //open
+  liftAuton(0, 10, 5);
+  moveForward(65, 20, 5); //78, 98, 5
+  latchDown.set(0); //close latchdown
+  liftAuton(2, 10, 1);
+  moveForward(-63, 50, 10000);
+
+  //feed one last time
+  Belt.spin(fwd, 100, pct);
+  inertialTurn(right, 15, 15, 1);
+  wait(500, msec);
+  moveForward(-33, 20, 1);
+  wait(500, msec);
+  moveForward(33, 20, 1); 
 }
 
 
@@ -35,7 +75,48 @@ void donutRedGoal()
  -----------------------------------*/
 void donutBlueGoal()
 {
-  internalTimer.reset();
+internalTimer.reset();
+
+//Grabbing Goal
+  bLiftPOT("down", 1);
+  visionSensorTest("Blue", 5);
+  moveForward(-20, 20, 1);
+  bLiftPOT("up", 2);
+
+  inertialTurn(left, 15, 105, 1);
+  Belt.spin(fwd, 100, pct);
+  moveForward(6, 20, 1);  
+  do
+  {
+    wait(500, msec);
+    moveForward(-31, 20, 1);
+    wait(500, msec);
+    moveForward(31, 20, 1); 
+  } while(internalTimer < 27000); //30000
+  Belt.stop(coast);
+
+//Grab Yellow
+  inertialTurn(left, 15, 7, 1);
+  wait(10, msec);
+  moveForward(7, 7, 1);  
+  wait(5, msec);
+  inertialTurn(left, 10, 20, 1);
+  wait(5, msec);
+  latchDown.set(1); //open
+  liftAuton(0, 10, 5);
+  moveForward(65, 20, 5); //78, 98, 5
+  latchDown.set(0); //close latchdown
+  liftAuton(2, 10, 1);
+  moveForward(-63, 50, 10000);
+
+  //feed one last time
+  Belt.spin(fwd, 100, pct);
+  inertialTurn(right, 15, 15, 1);
+  wait(500, msec);
+  moveForward(-33, 20, 1);
+  wait(500, msec);
+  moveForward(33, 20, 1); 
+
 }
 
 
@@ -146,11 +227,11 @@ void goalFrontBlue()
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(78, 100, 5);
+  moveForward(80, 100, 5);
   latchDown.set(0);
   moveForward(-40, 30, 10000);
   liftAuton(2, 10, 1);
-  visionSensorTest("Purple", 5);
+  //visionSensorTest("Purple", 5);
   wait(1, sec);
 
   //get personal
@@ -169,11 +250,16 @@ void goalFrontBlue()
 
 
   moveForward(20, 10, 1);
+  inertialTurn(right, 15, 30, 1);
+  Belt.spin(fwd, 95, pct);
+  moveForward(-45, 15, 1);
+
   do{
-    Belt.spin(fwd, 95, pct);
-    // moveForward(-10, 15, 1);
-    // moveForward(-10, 15, 1);
-  }while(internalTimer > 30000);
+    wait(5, msec);
+    moveForward(30, 15, 1);
+    wait(5, msec);
+    moveForward(-30, 15, 1);
+  }while(internalTimer < 45000);
 }
 
 

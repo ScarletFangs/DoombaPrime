@@ -36,8 +36,8 @@ void userControl(){
     beltControl();
     changespeed();
     //potbLift();
-    // printf("right: %4.3f   |", angleLiftR.angle(deg));
-    // printf("left: %4.3f\n", angleLiftL.angle(deg));
+    printf("right: %4.3f   |", angleLiftR.angle(deg));
+    printf("left: %4.3f\n", angleLiftL.angle(deg));
   }
 }
 
@@ -45,12 +45,15 @@ void userControl(){
 void Autonomous(){
   //goalTest();
   //printing(2);
+  //donutBlueGoal();
+  //donutRedGoal();
   //donutRedRamp();
   //rampFrontBlue();
   //rampFrontRed();
-  // sensorTest();
+  //sensorTest();
   // //rampSafe();
-  skillsAuton();
+  //skillsAuton();
+  goalFrontBlue();
 
 
   // bool yes = true;

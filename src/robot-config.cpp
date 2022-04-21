@@ -21,8 +21,8 @@ motor right3(PORT6, ratio18_1, true); //front motor right
 //Motor Groups
 motor_group leftWheels(left1, left2, left3);
 motor_group rightWheels(right1, right2, right3);
-motor_group frontWheels(left2, right2);
-motor_group backWheels(left1, right1);
+motor_group frontWheels(left2, right2, left3);
+motor_group backWheels(left1, right1, right3);
 
 //4 Bar motor
 motor liftL1(PORT3, ratio36_1, false);
