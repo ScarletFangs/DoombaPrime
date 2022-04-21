@@ -103,14 +103,14 @@ void bLiftPOT(string dir, double timeout){
   if(dir == "up"){
     while((angleLiftL.angle(deg) > 75.5)&&(angleLiftR.angle(deg) > 75.5))  //83
     {  
-      printf("[up] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
+      //printf("[up] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
       bLift.spin(reverse, 50, pct);   
     }
     bLift.stop(hold);
   }else if(dir == "down"){
-    while((angleLiftL.angle(deg) < 138 )&&(angleLiftR.angle(deg) < 133))
+    while((angleLiftL.angle(deg) < 133 )&&(angleLiftR.angle(deg) < 133))
     {
-      printf("[down] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
+      //printf("[down] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
       bLift.spin(fwd, 50, pct);   
     }
     bLift.stop(hold);
@@ -391,9 +391,258 @@ void visionSensorTest(string goalColor, double speed)
   }
 }
 
+void visionSensorMORE(string goalColor, bool pursuit, turnType dir, double turnSpeed, double pursuitSpeed, double pursuitDistance, int targetWidth)
+{
+  int center = 119; //70
+  int OKerror = 20;
+  double xScale = 480.0/310;//Scaling the vision sensor range to the V5 Brain Screen
+  double yScale = 240.0/212;
+  int targetCenter = 0; int x = 0; int y=0; int height =0; int width = 0;
+  bool isTrue = true; 
+  string Hue = goalColor;
 
+  if(Hue == "Red")
+  {
+    printf("In Red Vision\n");
+    while(isTrue)
+    {
+      Brain.Screen.clearLine();
+      Brain.Screen.clearScreen();
+      Vision1.takeSnapshot(RED_GOAL);
+      if (isTrue)
+      {
+        targetCenter = Vision1.largestObject.centerX;
+        x = Vision1.largestObject.originX;
+        y = Vision1.largestObject.originY;
+        width = Vision1.largestObject.width;
+        printf("width: %d\n", width);
+        height = Vision1.largestObject.height;
+        printf("height: %d\n", height);
+        Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
+        Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
+        
+        if(targetCenter < (center - OKerror)) //If the object is to the left of center
+        {
+          //turn right
+          rightWheels.spin(fwd, turnSpeed, velocityUnits::pct);
+          leftWheels.spin(reverse, turnSpeed, velocityUnits::pct);
+          printf("Turning Right\n");
+        } 
+        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
+        {
+          //turn left
+          rightWheels.spin(directionType::rev, turnSpeed, velocityUnits::pct);
+          leftWheels.spin(directionType::fwd, turnSpeed, velocityUnits::pct);
+          printf("Turning Left\n");
+        } 
+        else //The object is not to the right of center and not to the left of center
+        {
+          //turn stop
+          leftWheels.stop(brakeType::brake);
+          rightWheels.stop(brakeType::brake);
+          printf("Red Goal Centered\n");
+        
+          if(pursuit) //only enter if you want to pursue object
+          {
+              if(width < targetWidth+OKerror)
+              {
+                printf("Attempting to get close enough to Red Goal\n");
+                moveForward(-pursuitDistance, pursuitSpeed, 5);
+              }
+              else
+              {
+                printf("Attempt success: Red Goal is close enough\n");
+                leftWheels.stop(brakeType::brake);
+                rightWheels.stop(brakeType::brake);
+                isTrue = false; //break out of loop
+              }
+          }
+          else
+          {
+            isTrue = false; //break out of loop
+          }
+        }
+      }
+      else
+      {
 
+        Brain.Screen.print("Vision Sensor: Red Goal Not Found!");
+        
+        if(dir == left) //decide which direction to turn while the vision sensor searches for object
+        {
+          turnClockwise(-10, 5, 3);
+        }
+        else
+        {
+          turnClockwise(10, 5, 3);
+        }
+        
+      }
+    task::sleep(100);
+    }
+  }
+  
+  else if(Hue == "Blue")
+  {
+    printf("In Blue Vision\n");
+      while(isTrue)
+      {
+      Brain.Screen.clearLine();
+      Brain.Screen.clearScreen();
+      Vision1.takeSnapshot(BLUE_GOAL);
+      if (Vision1.largestObject.exists)
+      {
+        targetCenter = Vision1.largestObject.centerX;
+        x = Vision1.largestObject.originX;
+        y = Vision1.largestObject.originY;
+        width = Vision1.largestObject.width;
+        printf("width: %d\n", width);
+        height = Vision1.largestObject.height;
+        printf("height: %d\n", height);
+        Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
+        Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
+        
+        if(targetCenter < (center - OKerror)) //If the object is to the left of center
+        {
+          //turn right
+          rightWheels.spin(directionType::fwd, turnSpeed, velocityUnits::pct);
+          leftWheels.spin(directionType::rev, turnSpeed, velocityUnits::pct);
+          printf("Turning Right\n");
+        } 
+        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
+        {
+          //turn left
+          rightWheels.spin(directionType::rev, turnSpeed, velocityUnits::pct);
+          leftWheels.spin(directionType::fwd, turnSpeed, velocityUnits::pct);
+          printf("Turning Left\n");
+        } 
+        else //The object is not to the right of center and not to the left of center
+        {
+          //turn stop
+          leftWheels.stop(brakeType::brake);
+          rightWheels.stop(brakeType::brake);
+          printf("Blue Goal Centered\n");
 
+          if(pursuit) //only enter if you want to pursue object
+          {
+              if(width < targetWidth+OKerror) 
+              {
+                printf("Attempting to get close enough to Blue Goal\n");
+                moveForward(-pursuitDistance, pursuitSpeed, 5);
+              }
+              else
+              {
+                printf("Attempt success: Blue Goal is close enough\n");
+                leftWheels.stop(brakeType::brake);
+                rightWheels.stop(brakeType::brake);
+                isTrue = false; //break out of loop
+              }
+          }
+          else
+          {
+            isTrue = false; //break out of loop
+          }
+        }
+      }
+      else
+      {
+        printf("Vision Sensor: Blue Goal Not Found!");
+        Brain.Screen.print("Vision Sensor: Blue Goal Not Found!");
+        
+        if(dir == left) //decide which direction to turn while the vision sensor searches for object
+        {
+          turnClockwise(-10, 5, 3);
+        }
+        else
+        {
+          turnClockwise(10, 5, 3);
+        }
+      }
+    task::sleep(100);
+    }
+  }
+  else if(Hue == "Ring")
+  {
+    printf("In Ring Vision\n");
+      while(isTrue)
+      {
+      Brain.Screen.clearLine();
+      Brain.Screen.clearScreen();
+      Vision1.takeSnapshot(DONUT);
+      if (Vision1.largestObject.exists)
+      {
+        targetCenter = Vision1.largestObject.centerX;
+        x = Vision1.largestObject.originX;
+        y = Vision1.largestObject.originY;
+        width = Vision1.largestObject.width;
+        printf("width: %d\n", width);
+        height = Vision1.largestObject.height;
+        printf("height: %d\n", height);
+        Brain.Screen.print (" X: %d Y: %d Width: %d Height: %d ",x, y, width, height);
+        Brain.Screen.drawRectangle(x*xScale, y*yScale, width*xScale, height*yScale);
+        
+        if(targetCenter < (center - OKerror)) //If the object is to the left of center
+        {
+          //turn right
+          rightWheels.spin(directionType::fwd, turnSpeed, velocityUnits::pct);
+          leftWheels.spin(directionType::rev, turnSpeed, velocityUnits::pct);
+          printf("Turning Right\n");
+        } 
+        else if (targetCenter > (center + OKerror)) //If the object is to the right of center
+        {
+          //turn left
+          rightWheels.spin(directionType::rev, turnSpeed, velocityUnits::pct);
+          leftWheels.spin(directionType::fwd, turnSpeed, velocityUnits::pct);
+          printf("Turning Left\n");
+        } 
+        else //The object is not to the right of center and not to the left of center
+        {
+          //turn stop
+          leftWheels.stop(brakeType::brake);
+          rightWheels.stop(brakeType::brake);
+          printf("Ring Centered\n");
+
+          if(pursuit) //only enter if you want to pursue object
+          {
+              if(width < targetWidth+OKerror) 
+              {
+                printf("Attempting to get close enough to Ring\n");
+                moveForward(-pursuitDistance, pursuitSpeed, 5);
+              }
+              else
+              {
+                printf("Attempt success: Ring is close enough\n");
+                leftWheels.stop(brakeType::brake);
+                rightWheels.stop(brakeType::brake);
+                isTrue = false; //break out of loop
+              }
+          }
+          else
+          {
+            isTrue = false; //break out of loop
+          }
+        }
+      }
+      else
+      {
+        printf("Vision Sensor: Ring Not Found!\n");
+        Brain.Screen.print("Vision Sensor: Ring Not Found!");
+        
+        if(dir == left) //decide which direction to turn while the vision sensor searches for object
+        {
+          printf("Searching Left\n");
+          turnClockwise(-10, 5, 3);
+        }
+        else if(dir == right)
+        {
+          printf("Searching Right\n");
+          turnClockwise(10, 5, 3);
+        }
+      }
+    task::sleep(100);
+    }
+  }
+}
 
 void printing(int aim){
   int x = 0; int y = 0;

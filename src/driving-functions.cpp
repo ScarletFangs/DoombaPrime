@@ -2,7 +2,7 @@
 #include "driving-functions.h"
 
 //Drive (100% yang, 85% sirena)
-float speed = 1;
+float speed = 0.95;
 void tankDrive(){
   if(abs(controller1.Axis3.value())>5||abs(controller1.Axis2.value())){
     leftWheels.spin(fwd, controller1.Axis3.value()*speed, pct);
@@ -47,7 +47,7 @@ bool speedtoggle = false;
 bool speedstopper = false;
 void changespeed(){
   if(speedtoggle){
-    speed = 0.3;
+    speed = 0.4;
   }else{
     speed = 1;
   }
@@ -124,12 +124,12 @@ void beltControl(){
 
 //Back lift
 void bLiftManual(){
-  if(controller1.ButtonB.pressing()||controller2.ButtonB.pressing()){
+  if(controller1.ButtonL1.pressing()){
     // bLift.spinToPosition(1.25, rev);
-    bLift.spin(fwd, 55.0, pct);
-  }else if(controller1.ButtonY.pressing()||controller2.ButtonY.pressing()){
+    bLift.spin(fwd, 65.0, pct);
+  }else if(controller1.ButtonB.pressing()){
     // bLift.spinToPosition(0.02, rev);
-    bLift.spin(reverse, 55.0, pct);
+    bLift.spin(reverse, 65.0, pct);
   }else{
     bLift.stop(hold);
   }

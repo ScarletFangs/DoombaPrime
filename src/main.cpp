@@ -32,10 +32,10 @@ void userControl(){
     tankDrive();
     liftControl();
     liftToggle();
-    //bLiftManual();
+    bLiftManual();
     beltControl();
     changespeed();
-    potbLift();
+    //potbLift();
     // printf("right: %4.3f   |", angleLiftR.angle(deg));
     // printf("left: %4.3f\n", angleLiftL.angle(deg));
   }
@@ -45,11 +45,12 @@ void userControl(){
 void Autonomous(){
   //goalTest();
   //printing(2);
-  donutRedRamp();
+  //donutRedRamp();
   //rampFrontBlue();
   //rampFrontRed();
   // sensorTest();
   // //rampSafe();
+  skillsAuton();
 
 
   // bool yes = true;
