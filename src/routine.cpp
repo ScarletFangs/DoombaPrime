@@ -223,11 +223,11 @@ void donutBlueRamp()
  -----------------------------------*/
 void goalFrontBlue()
 {
-  internalTimer.reset();
+internalTimer.reset();
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(80, 100, 5);
+  moveForward(82, 100, 5);
   latchDown.set(0);
   moveForward(-40, 30, 10000);
   liftAuton(2, 10, 1);
@@ -278,7 +278,7 @@ void goalFrontRed()
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(80, 100, 5);
+  moveForward(82, 100, 5);
   latchDown.set(0);
   moveForward(-40, 30, 10000);
   liftAuton(2, 10, 1);

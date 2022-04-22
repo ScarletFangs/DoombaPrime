@@ -101,14 +101,14 @@ void bLiftPOT(string dir, double timeout){
   setMotorTimeout(timeout);
 
   if(dir == "up"){
-    while((angleLiftL.angle(deg) > 83)&&(angleLiftR.angle(deg) > 85))//75  //83
+    while((angleLiftL.angle(deg) > 78)&&(angleLiftR.angle(deg) > 83))//75  //83
     {  
       //printf("[up] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
       bLift.spin(reverse, 50, pct);   
     }
     bLift.stop(hold);
   }else if(dir == "down"){
-    while((angleLiftL.angle(deg) < 129 )&&(angleLiftR.angle(deg) < 130))
+    while((angleLiftL.angle(deg) < 129 )&&(angleLiftR.angle(deg) < 129))
     {
       //printf("[down] left:%4.2f   right:%4.2f\n", angleLiftL.angle(deg), angleLiftR.angle(deg));
       bLift.spin(fwd, 50, pct);   
