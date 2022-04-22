@@ -15,8 +15,6 @@ void goalFrontRed();
 void rampFrontRed();
 void rampFrontBlue();
 
-void rampSafe();
-
 void sensorTest();
 
 void skillsAuton();

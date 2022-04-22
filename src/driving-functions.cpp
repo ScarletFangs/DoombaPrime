@@ -47,7 +47,7 @@ bool speedtoggle = false;
 bool speedstopper = false;
 void changespeed(){
   if(speedtoggle){
-    speed = 0.4;
+    speed = 0.35;
   }else{
     speed = 1;
   }

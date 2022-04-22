@@ -23,7 +23,7 @@ string robotStatus[4]{
 
 int maxMenuIndex[maxMenus]{
   2,
-  3,
+  5,
   2,
 };
 
@@ -41,7 +41,7 @@ string menuTypes[maxMenus]{
 
 string menuOptions[maxMenus][maxOptions]{
   {"Blue", "Red", ""},
-  {"GoalSide", "RampSide", "Skills"},
+  {"GoalSide", "RampSide", "Rings_Ramp", "Rings_Goal", "Skills"},
   {"Tank", "Arcade", ""}
 };
 

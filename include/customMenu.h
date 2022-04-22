@@ -34,7 +34,7 @@ using namespace vex;
 
 //Define max entries in 2d array for easy coding
 #define maxMenus		   	3		//Make this the same # as items in maxMenusIndex
-#define maxOptions			3		//Make this the same # as items in 2D of menuDisplayIndex
+#define maxOptions			5		//Make this the same # as items in 2D of menuDisplayIndex
 
 //Define robot status for easy coding
 #define modeDisabled		0
@@ -47,7 +47,9 @@ using namespace vex;
 #define RED				    	1
 #define GOALSIDE				0
 #define RAMPSIDE			  1
-#define SKILLS		      2
+#define RING_RAMP       2
+#define RING_GOAL       3
+#define SKILLS		      4
 #define TANK	  		    0
 #define ARCADE				  1
 #define AUTON_COLOR			0
