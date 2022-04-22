@@ -386,7 +386,7 @@ void rampFrontRed()
   //get yellow goal
   latchDown.set(1);
   liftAuton(0, 10, 5);
-  moveForward(84, 85, 5); //78, 98, 5
+  moveForward(82, 100, 5); //78, 98, 5
   latchDown.set(0);
 
   moveForward(-40, 30, 10000);
